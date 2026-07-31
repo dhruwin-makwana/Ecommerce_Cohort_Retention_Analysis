@@ -10,6 +10,24 @@
 * **Git & GitHub:** Utilized for version control, project tracking, and sharing findings with the community. 🐙
 * **Dataset:** Microsoft Contoso Retail Enterprise Dataset
 
+
+### 🛠️ Technical Architecture & Tooling Strategy
+
+This project follows a multi-tiered data pipeline designed to mirror real-world enterprise analytics workflows—pushing heavy processing up to the database layer while leveraging reporting tools for validation and executive delivery.
+
+### 1. PostgreSQL (The Transformation & Logic Engine)
+* **Role:** Heavy data processing and business logic.
+* **Execution:** All cohort windowing (365-day repeat gates), date-truncation, CTEs, dynamic exchange-rate currency conversions, and customer sequence indexing were executed directly inside PostgreSQL. 
+* **Key Artifact:** Engineered the foundational `public.cohort_analysis` database view to serve as a single source of truth for majorly all downstream queries.
+
+### 2. Microsoft Excel (Data Auditing & Tabular Summaries)
+* **Role:** Data verification and tabular stakeholder delivery.
+* **Execution:** Query results were exported to Excel to perform rapid statistical checks, format percentage metrics, build preliminary ad-hoc charts, and structure clean summary sheets (`.xlsx`) in the `/results` repository directory for financial auditing.
+
+### 3. Power BI (Executive Dashboarding & Visual Storytelling)
+* **Role:** Interactive reporting and dynamic KPI tracking.
+* **Execution:** Connected directly to the finalized SQL outputs to construct an interactive executive dashboard. Utilized DAX (Data Analysis Expressions) for dynamic measures like `365-Day Retention %`, `LTV Multiplier`, and `Days-to-Second-Order Distribution` to enable seamless cross-filtering across gateway product subcategories.
+
 ---
 
 ## 🚀 Executive Summary (TL;DR)--
@@ -121,9 +139,9 @@ FROM
 
 ### 📊 Phase 1: Baseline Retention Efficiency & Return Cadence (Question 1)
 **Core Objective:** Quantify the size of the "One-and-Done" revenue leak and identify the exact post-purchase timing window for re-engagement.
-
-#### **Q1: What percentage of our acquired customers convert from a first purchase to a second purchase within 365 days?**
 * **Hypothesis:** Because e-commerce relies heavily on acquisition, the baseline repeat rate is likely low, creating a "one-and-done" bottleneck.
+#### **Q1: What percentage of our acquired customers convert from a first purchase to a second purchase within 365 days?**
+
 * **Why this matters:** We cannot improve what we don't measure. Establishing a strict baseline shows the exact size of the retention gap.
 
 <details>
@@ -223,6 +241,18 @@ ORDER BY
 </details>
 
 **🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+
+<details>
+<summary><b>🔍 Click to view Resultant Table</b></summary>
+
+|customer_segment|total_customer_count|customer_share_pct|total_segment_revenue|revenue_share_pct|avg_ltv|ltv_multiplier|
+|----------------|--------------------|------------------|---------------------|-----------------|-------|--------------|
+|Churned_Cust|6794|79.0|14516604.705265613|63.9|2136.68|1.00|
+|Retained_Cust|1807|21.0|8195692.105907859|36.1|4535.52|2.12|
+
+</details>
+
+
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q1A ]
 
@@ -465,14 +495,102 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 **Core Objective:** Prove the financial ROI of a repeat buyer to justify shifting budget from pure acquisition to retention.
 * **Hypothesis:** "Because repeat rates are low, the small group of repeat buyers must be generating a disproportionately massive chunk of our total Lifetime Value (LTV) to keep the business profitable."
 
-#### Q2 & Q2A: What is the average LTV of a single-order buyer versus a repeat buyer, and what is their revenue concentration?
+#### **Q2 & Q2A: What is the average LTV of a single-order buyer versus a repeat buyer, and what is their revenue concentration(percentage of our total cumulative net revenue)?**
 * **Why this matters:** Proves to stakeholders that a small segment of retained users drives the majority of the business.
 
 <details>
 <summary><b>🔍 Click to view SQL Query</b></summary>
 
 ```sql
-[ 💻 PLACEHOLDER: Insert your Q2/Q2A SQL code here ]
+/* 
+Business Questions Solved:
+- Q1: Repeat purchase conversion rate (% of acquired customers retained within 365 days)
+- Q2: Average Lifetime Value of a single-order buyer versus a repeat buyer
+- Q2A: Revenue concentration (Revenue split: Churned vs. Retained)
+- Q2B: LTV Multiplier (Expansion factor of repeat buyers vs. 1-time buyers) */
+
+WITH mature_cohort_customers AS (
+    -- Step 1: Isolate mature customer cohort acquired between 12 and 24 months ago
+    SELECT
+        ca.customerkey,
+        MIN(ca.orderdate) AS cohort_date
+    FROM
+        cohort_analysis ca
+    GROUP BY
+        ca.customerkey
+    HAVING
+        MIN(ca.orderdate) >= (
+            SELECT
+                MAX(ca.orderdate)
+            FROM
+                cohort_analysis ca
+        ) - INTERVAL '24 months'
+        AND MIN(ca.orderdate) <= (
+            SELECT
+                MAX(ca.orderdate)
+            FROM
+                cohort_analysis ca
+        ) - INTERVAL '12 months'
+),
+
+customer_365d_orders AS (
+    -- Step 2: Extract all orders placed within a 365-day window from each customer's first purchase
+    SELECT
+        ca.customerkey,
+        ca.orderdate,
+        ca.total_net_revenue
+    FROM
+        mature_cohort_customers m
+    INNER JOIN 
+        cohort_analysis ca ON
+        m.customerkey = ca.customerkey
+    WHERE
+        ca.orderdate <= m.cohort_date + INTERVAL '365 days'
+),
+
+customer_buckets AS (
+    -- Step 3: Segment customers into Churned (1 order) vs. Retained (2+ orders) and calculate total revenue
+    SELECT
+        customerkey,
+        CASE
+            WHEN COUNT(customerkey) = 1 THEN 'Churned_Cust'
+            WHEN COUNT(customerkey) >= 2 THEN 'Retained_Cust'
+        END AS customer_segment,
+        SUM(total_net_revenue) AS total_customer_revenue
+    FROM
+        customer_365d_orders
+    GROUP BY
+        customerkey
+)
+-- Final Output: Cohort volume, revenue concentration %, LTV, and LTV multiplier comparison
+SELECT
+    customer_segment,
+    COUNT(customerkey) AS total_customer_count,
+    ROUND(
+        COUNT(customerkey) * 100.0 / SUM(COUNT(customerkey)) OVER(),
+        1
+    ) AS customer_share_pct,
+    
+    SUM(total_customer_revenue) AS total_segment_revenue,
+    ROUND(
+        (SUM(total_customer_revenue) * 100.0 / SUM(SUM(total_customer_revenue)) OVER())::NUMERIC, 
+        1
+    ) AS revenue_share_pct,
+    
+    ROUND(
+        (SUM(total_customer_revenue) / COUNT(customerkey))::NUMERIC, 
+        2
+    ) AS avg_ltv,
+    ROUND(
+        ((SUM(total_customer_revenue) / COUNT(customerkey)) / FIRST_VALUE(SUM(total_customer_revenue) / COUNT(customerkey)) OVER(ORDER BY customer_segment))::NUMERIC, 
+        2
+    ) AS ltv_multiplier
+FROM
+    customer_buckets
+GROUP BY
+    customer_segment
+ORDER BY
+    customer_segment ASC;
 ```
 </details>
 
@@ -482,14 +600,102 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 
-#### Q2B (The LTV Multiplier): By what exact factor ($X\times$) does customer value expand when a first-time buyer is converted into a second-time buyer?
+#### **Q2B (The LTV Multiplier): By what exact factor ($X\times$) does customer value expand when a first-time buyer is converted into a second-time buyer?**
 * **Why this matters:** Quantifies exactly how much more a customer is worth if marketing can successfully get them to buy a second time.
 
 <details>
 <summary><b>🔍 Click to view SQL Query</b></summary>
 
 ```sql
-[ 💻 PLACEHOLDER: Insert your Q2B SQL code here ]
+/* 
+Business Questions Solved:
+- Q1: Repeat purchase conversion rate (% of acquired customers retained within 365 days)
+- Q2: Average Lifetime Value of a single-order buyer versus a repeat buyer
+- Q2A: Revenue concentration (Revenue split: Churned vs. Retained)
+- Q2B: LTV Multiplier (Expansion factor of repeat buyers vs. 1-time buyers) */
+
+WITH mature_cohort_customers AS (
+    -- Step 1: Isolate mature customer cohort acquired between 12 and 24 months ago
+    SELECT
+        ca.customerkey,
+        MIN(ca.orderdate) AS cohort_date
+    FROM
+        cohort_analysis ca
+    GROUP BY
+        ca.customerkey
+    HAVING
+        MIN(ca.orderdate) >= (
+            SELECT
+                MAX(ca.orderdate)
+            FROM
+                cohort_analysis ca
+        ) - INTERVAL '24 months'
+        AND MIN(ca.orderdate) <= (
+            SELECT
+                MAX(ca.orderdate)
+            FROM
+                cohort_analysis ca
+        ) - INTERVAL '12 months'
+),
+
+customer_365d_orders AS (
+    -- Step 2: Extract all orders placed within a 365-day window from each customer's first purchase
+    SELECT
+        ca.customerkey,
+        ca.orderdate,
+        ca.total_net_revenue
+    FROM
+        mature_cohort_customers m
+    INNER JOIN 
+        cohort_analysis ca ON
+        m.customerkey = ca.customerkey
+    WHERE
+        ca.orderdate <= m.cohort_date + INTERVAL '365 days'
+),
+
+customer_buckets AS (
+    -- Step 3: Segment customers into Churned (1 order) vs. Retained (2+ orders) and calculate total revenue
+    SELECT
+        customerkey,
+        CASE
+            WHEN COUNT(customerkey) = 1 THEN 'Churned_Cust'
+            WHEN COUNT(customerkey) >= 2 THEN 'Retained_Cust'
+        END AS customer_segment,
+        SUM(total_net_revenue) AS total_customer_revenue
+    FROM
+        customer_365d_orders
+    GROUP BY
+        customerkey
+)
+-- Final Output: Cohort volume, revenue concentration %, LTV, and LTV multiplier comparison
+SELECT
+    customer_segment,
+    COUNT(customerkey) AS total_customer_count,
+    ROUND(
+        COUNT(customerkey) * 100.0 / SUM(COUNT(customerkey)) OVER(),
+        1
+    ) AS customer_share_pct,
+    
+    SUM(total_customer_revenue) AS total_segment_revenue,
+    ROUND(
+        (SUM(total_customer_revenue) * 100.0 / SUM(SUM(total_customer_revenue)) OVER())::NUMERIC, 
+        1
+    ) AS revenue_share_pct,
+    
+    ROUND(
+        (SUM(total_customer_revenue) / COUNT(customerkey))::NUMERIC, 
+        2
+    ) AS avg_ltv,
+    ROUND(
+        ((SUM(total_customer_revenue) / COUNT(customerkey)) / FIRST_VALUE(SUM(total_customer_revenue) / COUNT(customerkey)) OVER(ORDER BY customer_segment))::NUMERIC, 
+        2
+    ) AS ltv_multiplier
+FROM
+    customer_buckets
+GROUP BY
+    customer_segment
+ORDER BY
+    customer_segment ASC;
 ```
 </details>
 
@@ -503,30 +709,308 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 **Core Objective:** Provide the marketing team with tactical, product-level triggers for retargeting campaigns.
 * **Hypothesis:** "If repeat buyers drive most of our profit, there must be specific gateway products in their FIRST purchase that naturally encourage them to come back."
 
-#### Q3A: Which initial product subcategories ("Gateway Products") drive the highest rate of 2nd purchases compared to the baseline?
-* **Why this matters:** If we know which products naturally create loyal customers, marketing can feature those specific products in top-of-funnel acquisition ads.Proves to stakeholders that a small segment of retained users drives the majority of the business.
+#### **Q3 & Q3A: Which initial product subcategories ("Gateway Products") drive the highest rate of 2nd purchases; and How do individual product subcategories perform against our overall company baseline retention rate?**
+* **Why this matters:** If we know which products naturally create loyal customers, marketing can feature those specific products in top-of-funnel acquisition ads.
 
 <details>
 <summary><b>🔍 Click to view SQL Query</b></summary>
 
 ```sql
-[ 💻 PLACEHOLDER: Insert your Q3A SQL code here ]
+/* 
+Business Questions Solved:
+- Primary Question 3: Gateway Product Performance
+    Which initial product subcategories ("Gateway Products") drive the 
+    highest rate of 2nd purchases?
+- Sub-Question 3A: Conversion Baseline Comparison
+    How do individual product subcategories perform against our overall 
+    company baseline retention rate (in percentage points variance)?
+*/
+
+WITH max_date_anchor AS (
+    -- Anchor CTE: Pull the max dataset date once to avoid repeated full table scans
+    SELECT
+        MAX(orderdate) AS max_date
+    FROM
+        sales
+),
+
+customer_first_purchases AS (
+    -- Step 1: Map product details and compute each customer's first purchase date
+    SELECT
+        s.orderkey,
+        s.linenumber,
+        s.orderdate,
+        MIN(orderdate) OVER(PARTITION BY s.customerkey ORDER BY s.orderdate) AS first_purchase_date,
+        s.customerkey,
+        s.productkey,
+        p.subcategorykey,
+        p.subcategoryname
+    FROM
+        sales s
+    INNER JOIN 
+        product p ON s.productkey = p.productkey
+),
+
+cohort_filtered_orders AS (
+    -- Step 2: Restrict analysis to the mature customer cohort (acquired 12-24 months ago)
+    -- and index their transactions chronologically within a 365-day window
+    SELECT
+        DENSE_RANK() OVER(PARTITION BY cfp.customerkey ORDER BY cfp.orderdate) AS order_num,
+        cfp.*
+    FROM
+        customer_first_purchases cfp
+    CROSS JOIN 
+        max_date_anchor mda
+    WHERE
+        first_purchase_date <= (mda.max_date - INTERVAL '12 months')
+        AND first_purchase_date >= (mda.max_date - INTERVAL '24 months')
+        AND orderdate <= (first_purchase_date + INTERVAL '365 days')
+),
+
+customer_order_totals AS (
+    -- Step 3: Calculate total orders placed per customer within the 1-year window
+    SELECT
+        MAX(cfo.order_num) OVER(PARTITION BY cfo.customerkey) AS total_order_placed,
+        cfo.*
+    FROM
+        cohort_filtered_orders cfo
+),
+
+acquired_cust_by_subcategory AS (
+    -- Step 4: Calculate total distinct customers acquired per subcategory on Order #1
+    SELECT
+        subcategoryname,
+        COUNT(DISTINCT customerkey) AS total_acquired_cust
+    FROM
+        customer_order_totals
+    WHERE
+        order_num = 1
+    GROUP BY
+        subcategoryname
+),
+
+company_baseline AS (
+    -- Step 5: Compute the overall 1-year cohort retention rate across the entire business
+    SELECT 
+        ROUND(
+            (COUNT(DISTINCT CASE WHEN total_order_placed >= 2 THEN customerkey END) * 100.0 / 
+             COUNT(DISTINCT customerkey))::NUMERIC, 
+            2
+        ) AS baseline_rate
+    FROM 
+        customer_order_totals
+    WHERE 
+        order_num = 1
+)
+
+-- Final Output: Aggregate retained customers, compute Subcategory Retention Rate,
+-- and measure variance against Company Baseline Performance (% Points)
+SELECT
+    cot.subcategoryname,
+    COUNT(DISTINCT cot.customerkey) AS retained_customer_count,
+    MAX(acs.total_acquired_cust) AS total_acquired_customer_count,
+    
+    -- Subcategory 1-year retention rate %
+    ROUND(
+        (COUNT(DISTINCT cot.customerkey) * 100.0 / MAX(acs.total_acquired_cust)), 
+        2
+    ) AS subcategory_retention_rate_pct,
+    
+    MAX(cb.baseline_rate) AS company_baseline_rate_pct,
+    
+    -- Variance against overall company baseline retention rate (Percentage Points)
+    ROUND(
+        (COUNT(DISTINCT cot.customerkey) * 100.0 / MAX(acs.total_acquired_cust)), 
+        2
+    ) - MAX(cb.baseline_rate) AS vs_baseline_pct_points
+
+FROM
+    customer_order_totals cot
+RIGHT JOIN 
+    acquired_cust_by_subcategory acs ON acs.subcategoryname = cot.subcategoryname
+CROSS JOIN 
+    company_baseline cb
+WHERE
+    cot.order_num = 1
+    AND cot.total_order_placed >= 2
+GROUP BY
+    cot.subcategoryname
+ORDER BY
+    retained_customer_count DESC;
 ```
 </details>
+
+**🖥️ Query**: [04_q3a_gateway_product_retention_vs_baseline.sql](/queries/04_q3a_gateway_product_retention_vs_baseline.sql)
+
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q3A ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 
-#### Q3B: What specific products or categories do customers most frequently buy on their second order after purchasing a specific Gateway Product?
+#### **Q3B: What specific products or categories do customers most frequently buy on their second order after purchasing a specific Gateway Product?**
 * **Why this matters:**  Maps the exact cross-sell pathway ($O_1 \rightarrow O_2$) so marketing can build highly personalized product recommendation engines.
 
 <details>
 <summary><b>🔍 Click to view SQL Query</b></summary>
 
 ```sql
-[ 💻 PLACEHOLDER: Insert your Q3B SQL code here ]
+/* 
+Business Questions Solved:
+- Primary Question 3: Gateway Product Performance
+    Which initial product subcategories ("Gateway Products") drive the 
+    highest rate of 2nd purchases?
+- Sub-Question 3B: Second Order Destination
+    What specific products or categories do customers most frequently 
+    buy on their second order after purchasing a specific Gateway Product?
+*/
+
+WITH max_date_anchor AS (
+    -- Anchor CTE: Pull the max dataset date once to avoid repeated full table scans
+    SELECT
+        MAX(orderdate) AS max_date
+    FROM
+        sales
+),
+
+customer_first_purchases AS (
+    -- Step 1: Map product details and compute each customer's first purchase date
+    SELECT
+        s.orderkey,
+        s.linenumber,
+        s.orderdate,
+        MIN(orderdate) OVER(PARTITION BY s.customerkey ORDER BY s.orderdate) AS first_purchase_date,
+        s.customerkey,
+        s.productkey,
+        p.subcategorykey,
+        p.subcategoryname
+    FROM
+        sales s
+    INNER JOIN 
+        product p ON s.productkey = p.productkey
+),
+
+cohort_filtered_orders AS (
+    -- Step 2: Restrict analysis to the mature customer cohort (acquired 12-24 months ago)
+    -- and index their transactions chronologically within a 365-day window
+    SELECT
+        DENSE_RANK() OVER(PARTITION BY cfp.customerkey ORDER BY cfp.orderdate) AS order_num,
+        cfp.*
+    FROM
+        customer_first_purchases cfp
+    CROSS JOIN 
+        max_date_anchor mda
+    WHERE
+        first_purchase_date <= (mda.max_date - INTERVAL '12 months')
+        AND first_purchase_date >= (mda.max_date - INTERVAL '24 months')
+        AND orderdate <= (first_purchase_date + INTERVAL '365 days')
+),
+
+customer_order_totals AS (
+    -- Step 3: Calculate total orders placed per customer within the 1-year window
+    SELECT
+        MAX(cfo.order_num) OVER(PARTITION BY cfo.customerkey) AS total_order_placed,
+        cfo.*
+    FROM
+        cohort_filtered_orders cfo
+),
+
+retained_cust_order_1 AS (
+    -- Step 4: Extract initial purchase details (Order #1) for retained customers
+    SELECT DISTINCT 
+        cot.total_order_placed,
+        cot.order_num,
+        cot.orderkey,
+        cot.orderdate,
+        cot.customerkey,
+        cot.subcategorykey,
+        cot.subcategoryname 
+    FROM 
+        customer_order_totals cot
+    WHERE 
+        cot.total_order_placed >= 2 
+        AND cot.order_num = 1
+),
+
+retained_cust_order_2 AS (
+    -- Step 5: Extract follow-up purchase details (Order #2) for retained customers
+    SELECT DISTINCT 
+        cot.total_order_placed,
+        cot.order_num,
+        cot.orderkey,
+        cot.orderdate,
+        cot.customerkey,
+        cot.subcategorykey,
+        cot.subcategoryname  
+    FROM 
+        customer_order_totals cot
+    WHERE 
+        cot.total_order_placed >= 2 
+        AND cot.order_num = 2
+),
+
+mapped_O1_O2 AS (
+    -- Step 6: Join Order #1 and Order #2 transactions at the customer level
+    SELECT 
+        rco1.total_order_placed,
+        rco1.order_num AS o1_order_num,
+        rco1.subcategorykey AS o1_subcategorykey,
+        rco1.subcategoryname AS o1_subcategoryname,
+        rco1.customerkey,
+        rco2.order_num AS o2_order_num,
+        rco2.subcategorykey AS o2_subcategorykey,
+        rco2.subcategoryname AS o2_subcategoryname
+    FROM 
+        retained_cust_order_1 rco1
+    INNER JOIN 
+        retained_cust_order_2 rco2 ON rco1.customerkey = rco2.customerkey
+),
+
+gateway_retained_totals AS (
+    -- Step 7: Total distinct retained customers for each Gateway Product (Order #1)
+    SELECT 
+        subcategoryname AS o1_subcategoryname,
+        COUNT(DISTINCT customerkey) AS total_retained_gateway_cust
+    FROM
+        retained_cust_order_1
+    GROUP BY
+        subcategoryname
+)
+
+-- Final Output: Analyze gateway-to-second-order product pairs, cross-sell incidence rates,
+-- and long-term retention into 3+ orders
+SELECT 
+    m.o1_subcategoryname AS order1_gateway_subcategory,
+    m.o2_subcategoryname AS order2_destination_subcategory,
+    COUNT(DISTINCT m.customerkey) AS pair_customer_count,
+    MAX(grt.total_retained_gateway_cust) AS total_gateway_retained_customers,
+    
+    -- Incidence Rate (% of Order 1 retained buyers who bought this Order 2 subcategory)
+    ROUND(
+        (COUNT(DISTINCT m.customerkey) * 100.0 / MAX(grt.total_retained_gateway_cust))::NUMERIC, 
+        2
+    ) AS incidence_rate_pct,
+    
+    -- Subsequent loyalty performance (reaching 3 or more total orders)
+    COUNT(DISTINCT CASE WHEN m.total_order_placed >= 3 THEN m.customerkey END) AS customers_reaching_3plus_orders,
+    ROUND(
+        (COUNT(DISTINCT CASE WHEN m.total_order_placed >= 3 THEN m.customerkey END) * 100.0 / COUNT(DISTINCT m.customerkey))::NUMERIC, 
+        2
+    ) AS pair_to_order3_conversion_pct
+
+FROM
+    mapped_O1_O2 m
+INNER JOIN 
+    gateway_retained_totals grt ON m.o1_subcategoryname = grt.o1_subcategoryname
+GROUP BY 
+    m.o1_subcategoryname, 
+    m.o2_subcategoryname
+ORDER BY 
+    m.o1_subcategoryname ASC, 
+    pair_customer_count DESC;
 ```
 </details>
+
+**🖥️ Query**: [05_q3b_gateway_to_second_order_destinations.sql](/queries/05_q3b_gateway_to_second_order_destinations.sql)
+
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q3B ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
@@ -557,6 +1041,5 @@ Based on the combined analytical findings, I recommend the following strategic s
 To reproduce this analysis locally:
 1. Clone this repository.
 2. Navigate to the `sql_load/` directory.
-3. Execute `00_schema_setup.sql` to generate the table structures.
-4. Execute `01_load_contoso_dataset.sql` (requires local mapping to the CSVs in the `contoso_raw_data/` folder).
-5. Run the query scripts in the `queries/` folder in numerical order, starting with the base view creation.
+3. Execute `contoso_100k.sql` to generate the table structures and load the contoso dataset in the table.
+4. Run the query scripts in the `queries/` folder in numerical order, starting with the base view creation.
