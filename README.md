@@ -4,12 +4,15 @@
 ### 🛠️ Tech Stack & Tools
 * **Database:** PostgreSQL
 * **Data Visualization:** Power BI, Microsoft Excel
-* **SQL Techniques:** Window Functions (`MIN() OVER`, `LEAD()`), Common Table Expressions (CTEs), Cohort Windowing, Dynamic Currency Conversion
+* **SQL:** The core engine of this project, used to extract, manipulate, and analyze large volumes of data. 🗄️
+* **Visual Studio Code (VS Code):** Used for making the commits and write the documentation for the project. 
+* **DBeaver:** The preferred database IDE for writing, formatting, and executing SQL scripts. 💻
+* **Git & GitHub:** Utilized for version control, project tracking, and sharing findings with the community. 🐙
 * **Dataset:** Microsoft Contoso Retail Enterprise Dataset
 
 ---
 
-## 🚀 Executive Summary (TL;DR)
+## 🚀 Executive Summary (TL;DR)--
 *To be filled out once all analysis is complete. Provide 3-4 bullet points of your highest-impact findings here.*
 * [ 💡 PLACEHOLDER: E.g., "Repeat buyers drive X% of total revenue despite only making up Y% of the customer base." ]
 * [ 💡 PLACEHOLDER: E.g., "Identified [Subcategory] as the ultimate Gateway Product, driving a 365-day retention rate XX% above the company baseline." ]
@@ -31,8 +34,8 @@
 
 To ensure statistical accuracy and avoid right-censoring bias (where recent customers haven't had enough time to return), this project employs strict cohort definitions:
 
-* **The "Mature Cohort" Gate:** Baseline metrics are restricted to customers acquired 12 to 24 months prior to the latest database entry. This ensures every customer analyzed had a full, fair 365 days to make a second purchase.
-* **The 365-Day Activation Window:** A repeat buyer is strictly defined as someone who makes their 2nd purchase within 365 days of their 1st purchase.
+* **The "Mature Cohort" Gate:** Baseline metrics are restricted to customers acquired 12 to 24 months prior to the latest database entry. This ensures every customer analyzed had a full, fair 365 days to make a second purchase. This frame sereves as a mature cohort and the most latest data on which we can make accurate analysis on.
+* **The 365-Day Activation Window:** A repeat buyer is strictly defined as someone who makes their 2nd purchase within 365 days of their 1st purchase. Thus we can say our company has the churn cycle of 365 days.
 * **Clean YoY Trending:** When comparing annual cohorts (e.g., 2021 vs 2022), partial business launch years or incomplete current years are excluded to prevent volatile, inaccurate percentage spikes.
 
 ---
@@ -47,9 +50,70 @@ Instead of repeating complex aggregation logic across every query, I engineered 
 2. Aggregates order counts per customer per transaction date.
 3. Windows each customer's absolute `first_purchase_date` and `cohort_year` for downstream retention models.
 
-[ 💻 PLACEHOLDER: Insert a link to your 00_create_view_cohort_analysis.sql file here ]
+<details>
+<summary><b>🔍 Click to view "View" Query</b></summary>
 
-[ 🖼️ PLACEHOLDER: Optional - Insert a screenshot of your Entity Relationship Diagram (ERD) mapping the Sales, Customer, and Product tables here. ]
+```sql
+/*
+Purpose:
+    Creates the base reporting view `public.cohort_analysis`.
+    Normalizes raw transactional data by:
+       1. Calculating total net revenue adjusted for exchange rates.
+       2. Aggregating order counts per customer per transaction date.
+       3. Extracting customer metadata (full name, age, country).
+       4. Windowing each customer's absolute `first_purchase_date` and 
+          `cohort_year` for downstream cohort retention models.
+*/
+
+CREATE OR REPLACE VIEW public.cohort_analysis AS 
+WITH customer_revenue AS (
+    -- Step 1: Calculate total net revenue (adjusted for currency exchange rates)
+    -- and order counts per customer per transaction date, joining demographic data.
+    SELECT
+        s.customerkey,
+        s.orderdate,
+        SUM(s.quantity * s.netprice / s.exchangerate) AS total_net_revenue,
+        COUNT(s.orderkey) AS num_orders,
+        c.givenname,
+        c.surname,
+        c.age,
+        c.countryfull
+    FROM
+        sales s
+    LEFT JOIN 
+        customer c ON c.customerkey = s.customerkey
+    GROUP BY
+        s.customerkey,
+        s.orderdate,
+        c.givenname,
+        c.surname,
+        c.age,
+        c.countryfull
+)
+
+-- Step 2: Compute acquisition cohort windows (first_purchase_date and cohort_year) 
+-- across the full transaction timeline for each customer.
+SELECT
+    cr.customerkey,
+    cr.orderdate,
+    cr.total_net_revenue,
+    cr.num_orders,
+    CONCAT(TRIM(cr.givenname), ' ', TRIM(cr.surname)) AS full_name,
+    cr.age,
+    cr.countryfull,
+    MIN(cr.orderdate) OVER (PARTITION BY cr.customerkey) AS first_purchase_date,
+    EXTRACT(YEAR FROM MIN(cr.orderdate) OVER (PARTITION BY cr.customerkey)) AS cohort_year
+FROM
+    customer_revenue cr;
+```
+</details>
+
+**🖥️ Query**: [00_create_view_cohort_analysis.sql](/queries/00_create_view_cohort_analysis.sql)
+
+![Top Paying Remote Data Analyst Jobs](/assets/Schema.png)
+*Entity-Relationship Diagram*
+
+**🖼️ Click here for better view**: [Entity-Relationship Diagram](/assets/Schema.png)
 
 ---
 
@@ -58,7 +122,7 @@ Instead of repeating complex aggregation logic across every query, I engineered 
 ### 📊 Phase 1: Baseline Retention Efficiency & Return Cadence (Question 1)
 **Core Objective:** Quantify the size of the "One-and-Done" revenue leak and identify the exact post-purchase timing window for re-engagement.
 
-#### Q1: What percentage of our acquired customers convert from a first purchase to a second purchase within 365 days?
+#### **Q1: What percentage of our acquired customers convert from a first purchase to a second purchase within 365 days?**
 * **Hypothesis:** Because e-commerce relies heavily on acquisition, the baseline repeat rate is likely low, creating a "one-and-done" bottleneck.
 * **Why this matters:** We cannot improve what we don't measure. Establishing a strict baseline shows the exact size of the retention gap.
 
@@ -66,37 +130,333 @@ Instead of repeating complex aggregation logic across every query, I engineered 
 <summary><b>🔍 Click to view SQL Query</b></summary>
 
 ```sql
-[ 💻 PLACEHOLDER: Insert your Q1 SQL code here ]
+/* 
+Business Questions Solved:
+- Q1: Repeat purchase conversion rate (% of acquired customers retained within 365 days)
+- Q2: Average Lifetime Value of a single-order buyer versus a repeat buyer
+- Q2A: Revenue concentration (Revenue split: Churned vs. Retained)
+- Q2B: LTV Multiplier (Expansion factor of repeat buyers vs. 1-time buyers) */
+
+WITH mature_cohort_customers AS (
+    -- Step 1: Isolate mature customer cohort acquired between 12 and 24 months ago
+    SELECT
+        ca.customerkey,
+        MIN(ca.orderdate) AS cohort_date
+    FROM
+        cohort_analysis ca
+    GROUP BY
+        ca.customerkey
+    HAVING
+        MIN(ca.orderdate) >= (
+            SELECT
+                MAX(ca.orderdate)
+            FROM
+                cohort_analysis ca
+        ) - INTERVAL '24 months'
+        AND MIN(ca.orderdate) <= (
+            SELECT
+                MAX(ca.orderdate)
+            FROM
+                cohort_analysis ca
+        ) - INTERVAL '12 months'
+),
+
+customer_365d_orders AS (
+    -- Step 2: Extract all orders placed within a 365-day window from each customer's first purchase
+    SELECT
+        ca.customerkey,
+        ca.orderdate,
+        ca.total_net_revenue
+    FROM
+        mature_cohort_customers m
+    INNER JOIN 
+        cohort_analysis ca ON
+        m.customerkey = ca.customerkey
+    WHERE
+        ca.orderdate <= m.cohort_date + INTERVAL '365 days'
+),
+
+customer_buckets AS (
+    -- Step 3: Segment customers into Churned (1 order) vs. Retained (2+ orders) and calculate total revenue
+    SELECT
+        customerkey,
+        CASE
+            WHEN COUNT(customerkey) = 1 THEN 'Churned_Cust'
+            WHEN COUNT(customerkey) >= 2 THEN 'Retained_Cust'
+        END AS customer_segment,
+        SUM(total_net_revenue) AS total_customer_revenue
+    FROM
+        customer_365d_orders
+    GROUP BY
+        customerkey
+)
+-- Final Output: Cohort volume, revenue concentration %, LTV, and LTV multiplier comparison
+SELECT
+    customer_segment,
+    COUNT(customerkey) AS total_customer_count,
+    ROUND(
+        COUNT(customerkey) * 100.0 / SUM(COUNT(customerkey)) OVER(),
+        1
+    ) AS customer_share_pct,
+    
+    SUM(total_customer_revenue) AS total_segment_revenue,
+    ROUND(
+        (SUM(total_customer_revenue) * 100.0 / SUM(SUM(total_customer_revenue)) OVER())::NUMERIC, 
+        1
+    ) AS revenue_share_pct,
+    
+    ROUND(
+        (SUM(total_customer_revenue) / COUNT(customerkey))::NUMERIC, 
+        2
+    ) AS avg_ltv,
+    ROUND(
+        ((SUM(total_customer_revenue) / COUNT(customerkey)) / FIRST_VALUE(SUM(total_customer_revenue) / COUNT(customerkey)) OVER(ORDER BY customer_segment))::NUMERIC, 
+        2
+    ) AS ltv_multiplier
+FROM
+    customer_buckets
+GROUP BY
+    customer_segment
+ORDER BY
+    customer_segment ASC;
 ```
 </details>
+
+**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q1A ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 
-#### Q1A: For the customers who do return, how many days does it take them to place their second order?
+#### **Q1A: For the customers who do return, how many days does it take them to place their second order?**
 * **Why this matters:** Understanding when people organically return tells marketing exactly when to trigger retargeting ads and automated email flows.
 
 <details>
 <summary><b>🔍 Click to view SQL Query</b></summary>
 
 ```sql
-[ 💻 PLACEHOLDER: Insert your Q1A SQL code here ]
+/*
+Business Question Solved:
+- Sub-Question 1A: Return Cadence Analysis
+    How many days does it take retained customers to place their second order?
+    Calculates distribution across time-to-second-order buckets as a percentage
+    of total repeat buyers and overall acquired cohort.
+*/
+
+WITH customer_order_sequence AS (
+    -- Step 1: Index transaction history chronologically for the 12-24 month mature cohort
+    SELECT
+        ROW_NUMBER() OVER(PARTITION BY ca.customerkey ORDER BY ca.orderdate) AS order_num,
+        ca.customerkey,
+        ca.first_purchase_date,
+        ca.orderdate
+    FROM
+        cohort_analysis ca
+    WHERE
+        ca.first_purchase_date >= (
+            SELECT
+                MAX(ca.orderdate)
+            FROM
+                cohort_analysis ca
+        ) - INTERVAL '24 months'
+        AND ca.first_purchase_date <= (
+            SELECT
+                MAX(ca.orderdate)
+            FROM
+                cohort_analysis ca
+        ) - INTERVAL '12 months'
+),
+
+retained_second_orders AS (
+    -- Step 2: Isolate the second transaction (Order #2) and calculate days elapsed from first purchase
+    SELECT
+        customerkey,
+        first_purchase_date,
+        orderdate AS second_purchase_date,
+        (orderdate - first_purchase_date) AS days_to_second_order
+    FROM
+        customer_order_sequence
+    WHERE
+        order_num = 2
+)
+
+-- Final Output: Group return cadence into actionable time windows with share percentages
+SELECT 
+    CASE
+        WHEN days_to_second_order BETWEEN 0 AND 90 THEN '01. 0-90 Days'
+        WHEN days_to_second_order BETWEEN 91 AND 180 THEN '02. 91-180 Days'
+        WHEN days_to_second_order BETWEEN 181 AND 270 THEN '03. 181-270 Days'
+        WHEN days_to_second_order BETWEEN 271 AND 365 THEN '04. 271-365 Days'
+        ELSE '05. 365+ Days'
+    END AS return_window_bucket,
+    
+    COUNT(customerkey) AS repeat_customer_count,
+    
+    -- Share % relative to total retained (repeat) buyers
+    ROUND(
+        COUNT(customerkey) * 100.0 / SUM(COUNT(customerkey)) OVER(), 
+        1
+    ) AS repeat_buyer_share_pct,
+    
+    -- Conversion % relative to total top-of-funnel acquired cohort
+    ROUND(
+        COUNT(customerkey) * 100.0 / (
+            SELECT COUNT(customerkey) 
+            FROM customer_order_sequence 
+            WHERE order_num = 1
+        ), 
+        1
+    ) AS cohort_conversion_pct
+
+FROM 
+    retained_second_orders
+GROUP BY 
+    return_window_bucket
+ORDER BY 
+    return_window_bucket ASC;
 ```
 </details>
+
+**🖥️ Query**: [02_q1a_return_cadence_time_to_second_order.sql](/queries/02_q1a_return_cadence_time_to_second_order.sql)
+
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q1A ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 
-#### Q1B: How has our 1-year retention rate percentage evolved year-over-year across mature historical cohorts?
+#### **Q1B: How has our 1-year retention rate percentage evolved year-over-year across mature historical cohorts?**
 * **Why this matters:** Tracks whether the company's customer loyalty is naturally improving or degrading over time.
 
 <details>
 <summary><b>🔍 Click to view SQL Query</b></summary>
 
 ```sql
-[ 💻 PLACEHOLDER: Insert your Q1B SQL code here ]
+/* 
+Business Question Solved:
+- Sub-Question 1B: Year-over-Year Retention & AOV Evolution
+    Tracks 1-year customer retention rates and average order value (AOV) 
+    expansion (Order #1 vs. Order #2) across complete historical cohorts.
+*/
+
+WITH eligible_cohort_orders AS (
+    -- Step 1: Filter for orders eligible for 365-day tracking and index distinct acquisition months per year
+    SELECT
+        ca.*,
+        DENSE_RANK() OVER(
+            PARTITION BY ca.cohort_year 
+            ORDER BY EXTRACT(MONTH FROM ca.first_purchase_date)
+        ) AS months_in_cohort_year
+    FROM
+        cohort_analysis ca
+    WHERE
+        ca.first_purchase_date <= (
+            SELECT
+                MAX(orderdate) - INTERVAL '12 months'
+            FROM
+                cohort_analysis
+        )
+),
+
+cohort_completeness_check AS (
+    -- Step 2: Ensure cohort years have a full 12 months of acquisition data
+    SELECT
+        *,
+        MAX(months_in_cohort_year) OVER(PARTITION BY cohort_year) AS total_distinct_months
+    FROM
+        eligible_cohort_orders
+),
+
+filtered_365d_orders AS (
+    -- Step 3: Restrict to complete 12-month cohorts and index orders within 365 days of acquisition
+    SELECT
+        *,
+        DENSE_RANK() OVER(PARTITION BY customerkey ORDER BY orderdate) AS order_rank,
+        COUNT(customerkey) OVER(
+            PARTITION BY customerkey 
+            ORDER BY orderdate 
+            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+        ) AS order_count
+    FROM
+        cohort_completeness_check
+    WHERE
+        total_distinct_months = 12
+        AND orderdate <= (
+            first_purchase_date + INTERVAL '365 days'
+        )
+),
+
+customer_order_totals AS (
+    -- Step 4: Count total order dates per customer within their acquisition cohort year
+    SELECT
+        cohort_year,
+        customerkey,
+        COUNT(orderdate) AS total_orders
+    FROM
+        filtered_365d_orders
+    GROUP BY
+        cohort_year,
+        customerkey
+),
+
+customer_retention_volumes AS (
+    -- Step 5: Aggregate customer acquisition volumes, churn/retention split, and retention % per cohort year
+    SELECT
+        cohort_year,
+        COUNT(customerkey) AS total_acquired_customers,
+        COUNT(CASE WHEN total_orders = 1 THEN customerkey END) AS churned_customer_count,
+        COUNT(CASE WHEN total_orders >= 2 THEN customerkey END) AS retained_customer_count,
+        ROUND(
+            (COUNT(CASE WHEN total_orders >= 2 THEN customerkey END) * 100.0 / COUNT(customerkey))::NUMERIC, 
+            2
+        ) AS retention_rate_pct
+    FROM
+        customer_order_totals
+    GROUP BY
+        cohort_year
+),
+
+retained_aov_by_order AS (
+    -- Step 6: Compute Order #1 AOV vs. Order #2 AOV specifically for retained customers (order_count >= 2)
+    SELECT
+        cohort_year,
+        ROUND(
+            (SUM(CASE WHEN order_rank = 1 THEN total_net_revenue END) / 
+             COUNT(CASE WHEN order_rank = 1 THEN customerkey END))::NUMERIC, 
+            2
+        ) AS retained_order_1_aov,
+        ROUND(
+            (SUM(CASE WHEN order_rank = 2 THEN total_net_revenue END) / 
+             COUNT(CASE WHEN order_rank = 2 THEN customerkey END))::NUMERIC, 
+            2
+        ) AS retained_order_2_aov
+    FROM
+        filtered_365d_orders
+    WHERE
+        order_count >= 2
+        AND order_rank BETWEEN 1 AND 2
+    GROUP BY
+        cohort_year
+)
+-- Final Output: Historical retention trajectory alongside Order #1 vs Order #2 AOV expansion by cohort year
+SELECT
+    crv.cohort_year,
+    crv.total_acquired_customers,
+    crv.churned_customer_count,
+    crv.retained_customer_count,
+    crv.retention_rate_pct,
+    aov.retained_order_1_aov,
+    aov.retained_order_2_aov
+FROM
+    customer_retention_volumes crv
+INNER JOIN 
+    retained_aov_by_order aov ON
+    crv.cohort_year = aov.cohort_year
+ORDER BY
+    crv.cohort_year ASC;
 ```
 </details>
+
+**🖥️ Query**: [02_q1a_return_cadence_time_to_second_order.sql](/queries/02_q1a_return_cadence_time_to_second_order.sql)
+
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q1B ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
@@ -115,6 +475,9 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 [ 💻 PLACEHOLDER: Insert your Q2/Q2A SQL code here ]
 ```
 </details>
+
+**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q2/Q2A ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
@@ -129,6 +492,9 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 [ 💻 PLACEHOLDER: Insert your Q2B SQL code here ]
 ```
 </details>
+
+**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q2B ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
