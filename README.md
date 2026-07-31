@@ -69,7 +69,10 @@ Instead of repeating complex aggregation logic across every query, I engineered 
 3. Windows each customer's absolute `first_purchase_date` and `cohort_year` for downstream retention models.
 
 <details>
-<summary><b>🔍 Click to view "View" Query</b></summary>
+<summary><b>🔍 Click here to view "Create_View" Query
+
+**🖥️ Query**: [00_create_view_cohort_analysis.sql](/queries/00_create_view_cohort_analysis.sql)
+</b></summary>
 
 ```sql
 /*
@@ -126,7 +129,6 @@ FROM
 ```
 </details>
 
-**🖥️ Query**: [00_create_view_cohort_analysis.sql](/queries/00_create_view_cohort_analysis.sql)
 
 ![Top Paying Remote Data Analyst Jobs](/assets/Schema.png)
 *Entity-Relationship Diagram*
@@ -145,7 +147,10 @@ FROM
 * **Why this matters:** We cannot improve what we don't measure. Establishing a strict baseline shows the exact size of the retention gap.
 
 <details>
-<summary><b>🔍 Click to view SQL Query</b></summary>
+<summary><b>🔍 Click to view SQL Query
+
+**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql) 
+</b></summary>
 
 ```sql
 /* 
@@ -240,8 +245,6 @@ ORDER BY
 ```
 </details>
 
-**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
-
 <details>
 <summary><b>🔍 Click to view Resultant Table</b></summary>
 
@@ -252,8 +255,6 @@ ORDER BY
 
 </details>
 
-
-
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q1A ]
 
 Key Insight: [ 💡 PLACEHOLDER: Insight here ]
@@ -262,7 +263,10 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 * **Why this matters:** Understanding when people organically return tells marketing exactly when to trigger retargeting ads and automated email flows.
 
 <details>
-<summary><b>🔍 Click to view SQL Query</b></summary>
+<summary><b>🔍 Click to view SQL Query
+
+**🖥️ Query**: [02_q1a_return_cadence_time_to_second_order.sql](/queries/02_q1a_return_cadence_time_to_second_order.sql)
+</b></summary>
 
 ```sql
 /*
@@ -347,7 +351,6 @@ ORDER BY
 ```
 </details>
 
-**🖥️ Query**: [02_q1a_return_cadence_time_to_second_order.sql](/queries/02_q1a_return_cadence_time_to_second_order.sql)
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q1A ]
 
@@ -357,7 +360,10 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 * **Why this matters:** Tracks whether the company's customer loyalty is naturally improving or degrading over time.
 
 <details>
-<summary><b>🔍 Click to view SQL Query</b></summary>
+<summary><b>🔍 Click to view SQL Query
+
+**🖥️ Query**: [03_q1b_yoy_retention_and_aov_trend.sql](/queries/03_q1b_yoy_retention_and_aov_trend.sql)
+</b></summary>
 
 ```sql
 /* 
@@ -485,7 +491,13 @@ ORDER BY
 ```
 </details>
 
-**🖥️ Query**: [02_q1a_return_cadence_time_to_second_order.sql](/queries/02_q1a_return_cadence_time_to_second_order.sql)
+<details>
+<summary><b>🔍 Click to view Resultant Table</b></summary>
+
+
+
+</details>
+
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q1B ]
 
@@ -499,7 +511,10 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 * **Why this matters:** Proves to stakeholders that a small segment of retained users drives the majority of the business.
 
 <details>
-<summary><b>🔍 Click to view SQL Query</b></summary>
+<summary><b>🔍 Click to view SQL Query
+
+**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+</b></summary>
 
 ```sql
 /* 
@@ -594,7 +609,12 @@ ORDER BY
 ```
 </details>
 
-**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+<details>
+<summary><b>🔍 Click to view Resultant Table</b></summary>
+
+
+
+</details>
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q2/Q2A ]
 
@@ -604,7 +624,10 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 * **Why this matters:** Quantifies exactly how much more a customer is worth if marketing can successfully get them to buy a second time.
 
 <details>
-<summary><b>🔍 Click to view SQL Query</b></summary>
+<summary><b>🔍 Click to view SQL Query
+
+**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+</b></summary>
 
 ```sql
 /* 
@@ -699,7 +722,13 @@ ORDER BY
 ```
 </details>
 
-**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+<details>
+<summary><b>🔍 Click to view Resultant Table</b></summary>
+
+
+
+</details>
+
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q2B ]
 
@@ -713,7 +742,10 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 * **Why this matters:** If we know which products naturally create loyal customers, marketing can feature those specific products in top-of-funnel acquisition ads.
 
 <details>
-<summary><b>🔍 Click to view SQL Query</b></summary>
+<summary><b>🔍 Click to view SQL Query
+
+**🖥️ Query**: [04_q3a_gateway_product_retention_vs_baseline.sql](/queries/04_q3a_gateway_product_retention_vs_baseline.sql)
+</b></summary>
 
 ```sql
 /* 
@@ -840,7 +872,12 @@ ORDER BY
 ```
 </details>
 
-**🖥️ Query**: [04_q3a_gateway_product_retention_vs_baseline.sql](/queries/04_q3a_gateway_product_retention_vs_baseline.sql)
+<details>
+<summary><b>🔍 Click to view Resultant Table</b></summary>
+
+
+
+</details>
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q3A ]
 
@@ -850,7 +887,10 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 * **Why this matters:**  Maps the exact cross-sell pathway ($O_1 \rightarrow O_2$) so marketing can build highly personalized product recommendation engines.
 
 <details>
-<summary><b>🔍 Click to view SQL Query</b></summary>
+<summary><b>🔍 Click to view SQL Query
+
+**🖥️ Query**: [05_q3b_gateway_to_second_order_destinations.sql](/queries/05_q3b_gateway_to_second_order_destinations.sql)
+</b></summary>
 
 ```sql
 /* 
@@ -1009,7 +1049,12 @@ ORDER BY
 ```
 </details>
 
-**🖥️ Query**: [05_q3b_gateway_to_second_order_destinations.sql](/queries/05_q3b_gateway_to_second_order_destinations.sql)
+<details>
+<summary><b>🔍 Click to view Resultant Table</b></summary>
+
+
+
+</details>
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q3B ]
 
