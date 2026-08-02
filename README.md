@@ -256,6 +256,7 @@ ORDER BY
 </details>
 
 ![Customer Retention vs. Churn Breakdown (Matured Cohort)](/assets/01_q1_customer_retention.png)
+
 *Donut chart displaying the percentage of acquired customers converting to a second purchase within a year.*
 
 **💡 Key Insights:**
@@ -372,6 +373,7 @@ ORDER BY
 </details>
 
 ![Days taken to place second order in the cohort year](/assets/02_q1A_repeat_cust_bucket.png)
+
 *Vertical Column chart displaying the count of retained customers bucketed quaterly based on days taken for placing second purchase order after the first purchase.*
 
 **💡 Key Insights:**
