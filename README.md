@@ -71,7 +71,7 @@ Instead of repeating complex aggregation logic across every query, I engineered 
 <details>
 <summary><b>🔍 Click here to view "Create_View" Query
 
-**🖥️ Query**: [00_create_view_cohort_analysis.sql](/queries/00_create_view_cohort_analysis.sql)
+**🖥️ Query Link**: [00_create_view_cohort_analysis.sql](/queries/00_create_view_cohort_analysis.sql)
 </b></summary>
 
 ```sql
@@ -149,7 +149,7 @@ FROM
 <details>
 <summary><b>🔍 Click to view SQL Query
 
-**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql) 
+**🖥️ Query Link**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql) 
 </b></summary>
 
 ```sql
@@ -255,9 +255,16 @@ ORDER BY
 
 </details>
 
-[ 🖼️ PLACEHOLDER: Insert visual/chart for Q1A ]
+![Customer Retention vs. Churn Breakdown (Matured Cohort)](/assets/01_q1_customer_retention.png)
+*Donut chart displaying the percentage of acquired customers converting to a second purchase within a year.*
 
-Key Insight: [ 💡 PLACEHOLDER: Insight here ]
+**💡 Key Insights:**
+
+* **Low Baseline Retention:** Only 21.0% of acquired customers (1,807 out of 8,601 total) successfully converted to a second purchase within a 365-day window.
+
+* **High Post-Acquisition Churn:** Nearly 4 out of every 5 customers (79.0%) are "one-and-done" buyers who never return to the ecosystem after their initial transaction.
+
+* **Business Takeaway:** The company is currently operating with a highly leaky bucket. Without improving the onboarding experience or immediate post-purchase retargeting, top-of-funnel acquisition budgets are largely being spent on customers who will not generate long-term value.
 
 #### **Q1A: For the customers who do return, how many days does it take them to place their second order?**
 * **Why this matters:** Understanding when people organically return tells marketing exactly when to trigger retargeting ads and automated email flows.
@@ -265,7 +272,7 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 <details>
 <summary><b>🔍 Click to view SQL Query
 
-**🖥️ Query**: [02_q1a_return_cadence_time_to_second_order.sql](/queries/02_q1a_return_cadence_time_to_second_order.sql)
+**🖥️ Query Link**: [02_q1a_return_cadence_time_to_second_order.sql](/queries/02_q1a_return_cadence_time_to_second_order.sql)
 </b></summary>
 
 ```sql
@@ -364,9 +371,16 @@ ORDER BY
 
 </details>
 
-[ 🖼️ PLACEHOLDER: Insert visual/chart for Q1A ]
+![Days taken to place second order in the cohort year](/assets/02_q1A_repeat_cust_bucket.png)
+*Vertical Column chart displaying the count of retained customers bucketed quaterly based on days taken for placing second purchase order after the first purchase.*
 
-Key Insight: [ 💡 PLACEHOLDER: Insight here ]
+**💡 Key Insights:**
+
+* **Early Momentum is Critical:** Nearly a quarter of all repeat buyers (22.6%) make their second purchase within the first 90 days. The likelihood of a customer returning steadily declines after this initial three-month window.
+
+* **The "Late Returner" Phenomenon:** Surprisingly, the largest single segment of repeat buyers (28.0%) takes more than a full year (365+ days) to make their second purchase.
+
+* **Business Takeaway:** The marketing team should deploy a two-pronged retargeting strategy. First, launch aggressive re-engagement campaigns within the 0-90 day window to capture early momentum. Second, implement an automated "anniversary" win-back campaign at the 12-month mark to successfully convert the massive pool of late returners.
 
 #### **Q1B: How has our 1-year retention rate percentage evolved year-over-year across mature historical cohorts?**
 * **Why this matters:** Tracks whether the company's customer loyalty is naturally improving or degrading over time.
@@ -374,7 +388,7 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 <details>
 <summary><b>🔍 Click to view SQL Query
 
-**🖥️ Query**: [03_q1b_yoy_retention_and_aov_trend.sql](/queries/03_q1b_yoy_retention_and_aov_trend.sql)
+**🖥️ Query Link**: [03_q1b_yoy_retention_and_aov_trend.sql](/queries/03_q1b_yoy_retention_and_aov_trend.sql)
 </b></summary>
 
 ```sql
@@ -534,7 +548,7 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 <details>
 <summary><b>🔍 Click to view SQL Query
 
-**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+**🖥️ Query Link**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
 </b></summary>
 
 ```sql
@@ -650,7 +664,7 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 <details>
 <summary><b>🔍 Click to view SQL Query
 
-**🖥️ Query**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
+**🖥️ Query Link**: [01_q1_q2_cohort_retention_ltv_multiplier.sql](/queries/01_q1_q2_cohort_retention_ltv_multiplier.sql)
 </b></summary>
 
 ```sql
@@ -771,7 +785,7 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 <details>
 <summary><b>🔍 Click to view SQL Query
 
-**🖥️ Query**: [04_q3a_gateway_product_retention_vs_baseline.sql](/queries/04_q3a_gateway_product_retention_vs_baseline.sql)
+**🖥️ Query Link**: [04_q3a_gateway_product_retention_vs_baseline.sql](/queries/04_q3a_gateway_product_retention_vs_baseline.sql)
 </b></summary>
 
 ```sql
@@ -949,7 +963,7 @@ Key Insight: [ 💡 PLACEHOLDER: Insight here ]
 <details>
 <summary><b>🔍 Click to view SQL Query
 
-**🖥️ Query**: [05_q3b_gateway_to_second_order_destinations.sql](/queries/05_q3b_gateway_to_second_order_destinations.sql)
+**🖥️ Query Link**: [05_q3b_gateway_to_second_order_destinations.sql](/queries/05_q3b_gateway_to_second_order_destinations.sql)
 </b></summary>
 
 ```sql
@@ -1109,932 +1123,7 @@ ORDER BY
 ```
 </details>
 
-<details>
-<summary><b>🔍 Click to view Resultant Table</b></summary>
-
-|order1_gateway_subcategory|order2_destination_subcategory|pair_customer_count|total_gateway_retained_customers|incidence_rate_pct|customers_reaching_3plus_orders|pair_to_order3_conversion_pct|
-|--------------------------|------------------------------|-------------------|--------------------------------|------------------|-------------------------------|-----------------------------|
-|Air Conditioners|Movie DVD|15|33|45.45|3|20.00|
-|Air Conditioners|Touch Screen Phones |5|33|15.15|1|20.00|
-|Air Conditioners|Monitors|5|33|15.15|1|20.00|
-|Air Conditioners|Smart phones & PDAs |5|33|15.15|0|0.00|
-|Air Conditioners|Cell phones Accessories|4|33|12.12|0|0.00|
-|Air Conditioners|Download Games|3|33|9.09|0|0.00|
-|Air Conditioners|VCD & DVD|3|33|9.09|0|0.00|
-|Air Conditioners|Desktops|3|33|9.09|1|33.33|
-|Air Conditioners|Home & Office Phones|3|33|9.09|1|33.33|
-|Air Conditioners|Camcorders|2|33|6.06|1|50.00|
-|Air Conditioners|Car Video|2|33|6.06|0|0.00|
-|Air Conditioners|Computers Accessories|2|33|6.06|0|0.00|
-|Air Conditioners|Laptops|2|33|6.06|1|50.00|
-|Air Conditioners|Recording Pen|2|33|6.06|1|50.00|
-|Air Conditioners|Televisions|2|33|6.06|1|50.00|
-|Air Conditioners|Water Heaters|2|33|6.06|2|100.00|
-|Air Conditioners|Bluetooth Headphones|1|33|3.03|0|0.00|
-|Air Conditioners|Refrigerators|1|33|3.03|0|0.00|
-|Air Conditioners|Cameras & Camcorders Accessories|1|33|3.03|0|0.00|
-|Air Conditioners|Boxed Games|1|33|3.03|0|0.00|
-|Air Conditioners|Lamps|1|33|3.03|0|0.00|
-|Air Conditioners|Home Theater System|1|33|3.03|0|0.00|
-|Air Conditioners|Printers, Scanners & Fax|1|33|3.03|1|100.00|
-|Bluetooth Headphones|Movie DVD|34|91|37.36|3|8.82|
-|Bluetooth Headphones|Smart phones & PDAs |27|91|29.67|4|14.81|
-|Bluetooth Headphones|Touch Screen Phones |21|91|23.08|2|9.52|
-|Bluetooth Headphones|Desktops|20|91|21.98|1|5.00|
-|Bluetooth Headphones|Televisions|11|91|12.09|1|9.09|
-|Bluetooth Headphones|Home & Office Phones|9|91|9.89|0|0.00|
-|Bluetooth Headphones|Computers Accessories|8|91|8.79|1|12.50|
-|Bluetooth Headphones|Laptops|8|91|8.79|0|0.00|
-|Bluetooth Headphones|Printers, Scanners & Fax|8|91|8.79|0|0.00|
-|Bluetooth Headphones|Monitors|7|91|7.69|2|28.57|
-|Bluetooth Headphones|Download Games|7|91|7.69|0|0.00|
-|Bluetooth Headphones|Boxed Games|6|91|6.59|0|0.00|
-|Bluetooth Headphones|Bluetooth Headphones|6|91|6.59|0|0.00|
-|Bluetooth Headphones|Cell phones Accessories|6|91|6.59|0|0.00|
-|Bluetooth Headphones|Digital SLR Cameras|5|91|5.49|0|0.00|
-|Bluetooth Headphones|Home Theater System|4|91|4.40|0|0.00|
-|Bluetooth Headphones|Microwaves|4|91|4.40|0|0.00|
-|Bluetooth Headphones|Recording Pen|4|91|4.40|0|0.00|
-|Bluetooth Headphones|Digital Cameras|3|91|3.30|1|33.33|
-|Bluetooth Headphones|VCD & DVD|3|91|3.30|0|0.00|
-|Bluetooth Headphones|Water Heaters|3|91|3.30|0|0.00|
-|Bluetooth Headphones|Refrigerators|3|91|3.30|0|0.00|
-|Bluetooth Headphones|Projectors & Screens|3|91|3.30|2|66.67|
-|Bluetooth Headphones|MP4&MP3|2|91|2.20|1|50.00|
-|Bluetooth Headphones|Car Video|2|91|2.20|1|50.00|
-|Bluetooth Headphones|Air Conditioners|1|91|1.10|0|0.00|
-|Bluetooth Headphones|Cameras & Camcorders Accessories|1|91|1.10|0|0.00|
-|Boxed Games|Movie DVD|61|196|31.12|8|13.11|
-|Boxed Games|Smart phones & PDAs |37|196|18.88|2|5.41|
-|Boxed Games|Touch Screen Phones |34|196|17.35|5|14.71|
-|Boxed Games|Desktops|33|196|16.84|3|9.09|
-|Boxed Games|Download Games|32|196|16.33|4|12.50|
-|Boxed Games|Printers, Scanners & Fax|28|196|14.29|2|7.14|
-|Boxed Games|Computers Accessories|26|196|13.27|4|15.38|
-|Boxed Games|Boxed Games|22|196|11.22|3|13.64|
-|Boxed Games|Laptops|19|196|9.69|3|15.79|
-|Boxed Games|Televisions|16|196|8.16|3|18.75|
-|Boxed Games|Monitors|16|196|8.16|3|18.75|
-|Boxed Games|Home & Office Phones|15|196|7.65|3|20.00|
-|Boxed Games|Projectors & Screens|14|196|7.14|1|7.14|
-|Boxed Games|Cell phones Accessories|11|196|5.61|1|9.09|
-|Boxed Games|Digital SLR Cameras|10|196|5.10|2|20.00|
-|Boxed Games|Water Heaters|10|196|5.10|0|0.00|
-|Boxed Games|Bluetooth Headphones|9|196|4.59|1|11.11|
-|Boxed Games|Digital Cameras|9|196|4.59|2|22.22|
-|Boxed Games|Air Conditioners|7|196|3.57|0|0.00|
-|Boxed Games|Home Theater System|7|196|3.57|1|14.29|
-|Boxed Games|VCD & DVD|7|196|3.57|0|0.00|
-|Boxed Games|Car Video|6|196|3.06|1|16.67|
-|Boxed Games|Microwaves|6|196|3.06|0|0.00|
-|Boxed Games|Washers & Dryers|6|196|3.06|0|0.00|
-|Boxed Games|Recording Pen|6|196|3.06|0|0.00|
-|Boxed Games|MP4&MP3|5|196|2.55|1|20.00|
-|Boxed Games|Camcorders|5|196|2.55|0|0.00|
-|Boxed Games|Cameras & Camcorders Accessories|4|196|2.04|1|25.00|
-|Boxed Games|Lamps|4|196|2.04|0|0.00|
-|Boxed Games|Fans|4|196|2.04|0|0.00|
-|Boxed Games|Refrigerators|3|196|1.53|1|33.33|
-|Boxed Games|Coffee Machines|2|196|1.02|0|0.00|
-|Camcorders|Movie DVD|12|51|23.53|2|16.67|
-|Camcorders|Smart phones & PDAs |12|51|23.53|2|16.67|
-|Camcorders|Boxed Games|10|51|19.61|1|10.00|
-|Camcorders|Printers, Scanners & Fax|8|51|15.69|1|12.50|
-|Camcorders|Projectors & Screens|6|51|11.76|0|0.00|
-|Camcorders|Home & Office Phones|6|51|11.76|1|16.67|
-|Camcorders|Water Heaters|6|51|11.76|0|0.00|
-|Camcorders|Touch Screen Phones |5|51|9.80|0|0.00|
-|Camcorders|Computers Accessories|5|51|9.80|2|40.00|
-|Camcorders|Download Games|5|51|9.80|0|0.00|
-|Camcorders|Monitors|4|51|7.84|1|25.00|
-|Camcorders|Desktops|4|51|7.84|0|0.00|
-|Camcorders|Televisions|4|51|7.84|1|25.00|
-|Camcorders|Recording Pen|3|51|5.88|0|0.00|
-|Camcorders|MP4&MP3|3|51|5.88|1|33.33|
-|Camcorders|Digital Cameras|3|51|5.88|1|33.33|
-|Camcorders|Cell phones Accessories|3|51|5.88|0|0.00|
-|Camcorders|Bluetooth Headphones|2|51|3.92|0|0.00|
-|Camcorders|Cameras & Camcorders Accessories|2|51|3.92|0|0.00|
-|Camcorders|Microwaves|2|51|3.92|0|0.00|
-|Camcorders|Refrigerators|1|51|1.96|0|0.00|
-|Camcorders|Home Theater System|1|51|1.96|1|100.00|
-|Camcorders|Digital SLR Cameras|1|51|1.96|0|0.00|
-|Camcorders|VCD & DVD|1|51|1.96|0|0.00|
-|Camcorders|Washers & Dryers|1|51|1.96|0|0.00|
-|Camcorders|Camcorders|1|51|1.96|0|0.00|
-|Cameras & Camcorders Accessories|Touch Screen Phones |11|35|31.43|0|0.00|
-|Cameras & Camcorders Accessories|Movie DVD|7|35|20.00|0|0.00|
-|Cameras & Camcorders Accessories|Boxed Games|7|35|20.00|0|0.00|
-|Cameras & Camcorders Accessories|Water Heaters|5|35|14.29|0|0.00|
-|Cameras & Camcorders Accessories|Televisions|5|35|14.29|0|0.00|
-|Cameras & Camcorders Accessories|Smart phones & PDAs |5|35|14.29|0|0.00|
-|Cameras & Camcorders Accessories|Desktops|5|35|14.29|1|20.00|
-|Cameras & Camcorders Accessories|Computers Accessories|4|35|11.43|1|25.00|
-|Cameras & Camcorders Accessories|Download Games|3|35|8.57|0|0.00|
-|Cameras & Camcorders Accessories|Bluetooth Headphones|3|35|8.57|0|0.00|
-|Cameras & Camcorders Accessories|Cell phones Accessories|2|35|5.71|0|0.00|
-|Cameras & Camcorders Accessories|Coffee Machines|2|35|5.71|0|0.00|
-|Cameras & Camcorders Accessories|Home & Office Phones|2|35|5.71|1|50.00|
-|Cameras & Camcorders Accessories|Monitors|2|35|5.71|0|0.00|
-|Cameras & Camcorders Accessories|Projectors & Screens|2|35|5.71|1|50.00|
-|Cameras & Camcorders Accessories|Digital SLR Cameras|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|Printers, Scanners & Fax|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|Air Conditioners|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|Recording Pen|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|Refrigerators|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|Car Video|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|Cameras & Camcorders Accessories|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|Camcorders|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|VCD & DVD|1|35|2.86|1|100.00|
-|Cameras & Camcorders Accessories|Laptops|1|35|2.86|0|0.00|
-|Cameras & Camcorders Accessories|Washers & Dryers|1|35|2.86|0|0.00|
-|Car Video|Movie DVD|30|64|46.88|5|16.67|
-|Car Video|Touch Screen Phones |14|64|21.88|1|7.14|
-|Car Video|Smart phones & PDAs |13|64|20.31|1|7.69|
-|Car Video|Televisions|12|64|18.75|2|16.67|
-|Car Video|Desktops|12|64|18.75|1|8.33|
-|Car Video|Download Games|10|64|15.63|1|10.00|
-|Car Video|Cell phones Accessories|9|64|14.06|1|11.11|
-|Car Video|Monitors|8|64|12.50|1|12.50|
-|Car Video|Printers, Scanners & Fax|8|64|12.50|1|12.50|
-|Car Video|Boxed Games|7|64|10.94|2|28.57|
-|Car Video|Laptops|6|64|9.38|1|16.67|
-|Car Video|Projectors & Screens|6|64|9.38|1|16.67|
-|Car Video|Home & Office Phones|5|64|7.81|0|0.00|
-|Car Video|Computers Accessories|5|64|7.81|0|0.00|
-|Car Video|Digital SLR Cameras|4|64|6.25|0|0.00|
-|Car Video|Microwaves|4|64|6.25|0|0.00|
-|Car Video|Coffee Machines|3|64|4.69|0|0.00|
-|Car Video|Car Video|3|64|4.69|0|0.00|
-|Car Video|Fans|2|64|3.13|0|0.00|
-|Car Video|VCD & DVD|2|64|3.13|0|0.00|
-|Car Video|Washers & Dryers|2|64|3.13|0|0.00|
-|Car Video|Air Conditioners|2|64|3.13|0|0.00|
-|Car Video|Recording Pen|2|64|3.13|0|0.00|
-|Car Video|Home Theater System|2|64|3.13|0|0.00|
-|Car Video|Lamps|1|64|1.56|0|0.00|
-|Car Video|MP4&MP3|1|64|1.56|0|0.00|
-|Car Video|Digital Cameras|1|64|1.56|1|100.00|
-|Car Video|Refrigerators|1|64|1.56|1|100.00|
-|Car Video|Cameras & Camcorders Accessories|1|64|1.56|0|0.00|
-|Car Video|Bluetooth Headphones|1|64|1.56|0|0.00|
-|Car Video|Water Heaters|1|64|1.56|0|0.00|
-|Cell phones Accessories|Movie DVD|57|161|35.40|5|8.77|
-|Cell phones Accessories|Smart phones & PDAs |36|161|22.36|6|16.67|
-|Cell phones Accessories|Touch Screen Phones |30|161|18.63|3|10.00|
-|Cell phones Accessories|Desktops|26|161|16.15|3|11.54|
-|Cell phones Accessories|Cell phones Accessories|19|161|11.80|0|0.00|
-|Cell phones Accessories|Download Games|18|161|11.18|3|16.67|
-|Cell phones Accessories|Boxed Games|17|161|10.56|1|5.88|
-|Cell phones Accessories|Printers, Scanners & Fax|16|161|9.94|2|12.50|
-|Cell phones Accessories|Projectors & Screens|15|161|9.32|0|0.00|
-|Cell phones Accessories|Computers Accessories|14|161|8.70|3|21.43|
-|Cell phones Accessories|Bluetooth Headphones|12|161|7.45|3|25.00|
-|Cell phones Accessories|Monitors|10|161|6.21|3|30.00|
-|Cell phones Accessories|Laptops|10|161|6.21|2|20.00|
-|Cell phones Accessories|Water Heaters|9|161|5.59|0|0.00|
-|Cell phones Accessories|Home & Office Phones|9|161|5.59|0|0.00|
-|Cell phones Accessories|Televisions|9|161|5.59|1|11.11|
-|Cell phones Accessories|Recording Pen|7|161|4.35|0|0.00|
-|Cell phones Accessories|Washers & Dryers|5|161|3.11|0|0.00|
-|Cell phones Accessories|Microwaves|5|161|3.11|0|0.00|
-|Cell phones Accessories|Digital SLR Cameras|5|161|3.11|0|0.00|
-|Cell phones Accessories|Home Theater System|4|161|2.48|1|25.00|
-|Cell phones Accessories|Car Video|4|161|2.48|0|0.00|
-|Cell phones Accessories|Air Conditioners|4|161|2.48|1|25.00|
-|Cell phones Accessories|Lamps|4|161|2.48|1|25.00|
-|Cell phones Accessories|Coffee Machines|3|161|1.86|0|0.00|
-|Cell phones Accessories|VCD & DVD|3|161|1.86|1|33.33|
-|Cell phones Accessories|Refrigerators|2|161|1.24|1|50.00|
-|Cell phones Accessories|MP4&MP3|2|161|1.24|1|50.00|
-|Cell phones Accessories|Camcorders|1|161|0.62|1|100.00|
-|Cell phones Accessories|Cameras & Camcorders Accessories|1|161|0.62|0|0.00|
-|Cell phones Accessories|Fans|1|161|0.62|0|0.00|
-|Cell phones Accessories|Digital Cameras|1|161|0.62|0|0.00|
-|Coffee Machines|Movie DVD|14|36|38.89|1|7.14|
-|Coffee Machines|Desktops|7|36|19.44|0|0.00|
-|Coffee Machines|Smart phones & PDAs |6|36|16.67|1|16.67|
-|Coffee Machines|Download Games|6|36|16.67|1|16.67|
-|Coffee Machines|Computers Accessories|6|36|16.67|2|33.33|
-|Coffee Machines|Touch Screen Phones |5|36|13.89|1|20.00|
-|Coffee Machines|Laptops|5|36|13.89|0|0.00|
-|Coffee Machines|Coffee Machines|3|36|8.33|0|0.00|
-|Coffee Machines|Cell phones Accessories|3|36|8.33|0|0.00|
-|Coffee Machines|Home & Office Phones|3|36|8.33|2|66.67|
-|Coffee Machines|Home Theater System|2|36|5.56|1|50.00|
-|Coffee Machines|Boxed Games|2|36|5.56|0|0.00|
-|Coffee Machines|Monitors|2|36|5.56|0|0.00|
-|Coffee Machines|Televisions|2|36|5.56|0|0.00|
-|Coffee Machines|Bluetooth Headphones|1|36|2.78|0|0.00|
-|Coffee Machines|Cameras & Camcorders Accessories|1|36|2.78|0|0.00|
-|Coffee Machines|Car Video|1|36|2.78|0|0.00|
-|Coffee Machines|Lamps|1|36|2.78|0|0.00|
-|Coffee Machines|MP4&MP3|1|36|2.78|0|0.00|
-|Coffee Machines|Printers, Scanners & Fax|1|36|2.78|0|0.00|
-|Coffee Machines|Projectors & Screens|1|36|2.78|0|0.00|
-|Coffee Machines|Refrigerators|1|36|2.78|0|0.00|
-|Coffee Machines|Washers & Dryers|1|36|2.78|0|0.00|
-|Coffee Machines|Water Heaters|1|36|2.78|0|0.00|
-|Computers Accessories|Movie DVD|47|153|30.72|5|10.64|
-|Computers Accessories|Touch Screen Phones |31|153|20.26|4|12.90|
-|Computers Accessories|Smart phones & PDAs |30|153|19.61|1|3.33|
-|Computers Accessories|Desktops|20|153|13.07|1|5.00|
-|Computers Accessories|Download Games|19|153|12.42|5|26.32|
-|Computers Accessories|Boxed Games|19|153|12.42|4|21.05|
-|Computers Accessories|Printers, Scanners & Fax|16|153|10.46|2|12.50|
-|Computers Accessories|Cell phones Accessories|15|153|9.80|2|13.33|
-|Computers Accessories|Home & Office Phones|14|153|9.15|1|7.14|
-|Computers Accessories|Televisions|14|153|9.15|3|21.43|
-|Computers Accessories|Monitors|13|153|8.50|2|15.38|
-|Computers Accessories|Laptops|11|153|7.19|2|18.18|
-|Computers Accessories|Digital SLR Cameras|9|153|5.88|2|22.22|
-|Computers Accessories|Computers Accessories|9|153|5.88|2|22.22|
-|Computers Accessories|Projectors & Screens|9|153|5.88|0|0.00|
-|Computers Accessories|Recording Pen|8|153|5.23|2|25.00|
-|Computers Accessories|Car Video|7|153|4.58|0|0.00|
-|Computers Accessories|Bluetooth Headphones|6|153|3.92|0|0.00|
-|Computers Accessories|Washers & Dryers|5|153|3.27|0|0.00|
-|Computers Accessories|Digital Cameras|5|153|3.27|1|20.00|
-|Computers Accessories|Refrigerators|4|153|2.61|1|25.00|
-|Computers Accessories|VCD & DVD|4|153|2.61|0|0.00|
-|Computers Accessories|Fans|3|153|1.96|1|33.33|
-|Computers Accessories|Lamps|3|153|1.96|1|33.33|
-|Computers Accessories|Microwaves|3|153|1.96|1|33.33|
-|Computers Accessories|Coffee Machines|3|153|1.96|0|0.00|
-|Computers Accessories|Water Heaters|3|153|1.96|0|0.00|
-|Computers Accessories|Camcorders|3|153|1.96|1|33.33|
-|Computers Accessories|Air Conditioners|3|153|1.96|1|33.33|
-|Computers Accessories|MP4&MP3|2|153|1.31|0|0.00|
-|Computers Accessories|Home Theater System|2|153|1.31|1|50.00|
-|Computers Accessories|Cameras & Camcorders Accessories|1|153|0.65|0|0.00|
-|Desktops|Movie DVD|142|363|39.12|15|10.56|
-|Desktops|Smart phones & PDAs |78|363|21.49|15|19.23|
-|Desktops|Touch Screen Phones |69|363|19.01|7|10.14|
-|Desktops|Desktops|52|363|14.33|14|26.92|
-|Desktops|Download Games|41|363|11.29|3|7.32|
-|Desktops|Cell phones Accessories|38|363|10.47|9|23.68|
-|Desktops|Projectors & Screens|31|363|8.54|6|19.35|
-|Desktops|Printers, Scanners & Fax|30|363|8.26|4|13.33|
-|Desktops|Laptops|30|363|8.26|6|20.00|
-|Desktops|Boxed Games|30|363|8.26|2|6.67|
-|Desktops|Televisions|29|363|7.99|8|27.59|
-|Desktops|Monitors|28|363|7.71|3|10.71|
-|Desktops|Computers Accessories|26|363|7.16|4|15.38|
-|Desktops|Water Heaters|24|363|6.61|3|12.50|
-|Desktops|Home & Office Phones|21|363|5.79|4|19.05|
-|Desktops|Bluetooth Headphones|19|363|5.23|3|15.79|
-|Desktops|Microwaves|17|363|4.68|2|11.76|
-|Desktops|Digital SLR Cameras|16|363|4.41|3|18.75|
-|Desktops|Recording Pen|15|363|4.13|2|13.33|
-|Desktops|Car Video|14|363|3.86|3|21.43|
-|Desktops|Home Theater System|12|363|3.31|0|0.00|
-|Desktops|Cameras & Camcorders Accessories|12|363|3.31|2|16.67|
-|Desktops|VCD & DVD|11|363|3.03|2|18.18|
-|Desktops|Digital Cameras|10|363|2.75|2|20.00|
-|Desktops|Air Conditioners|7|363|1.93|1|14.29|
-|Desktops|Coffee Machines|7|363|1.93|1|14.29|
-|Desktops|Camcorders|6|363|1.65|3|50.00|
-|Desktops|MP4&MP3|5|363|1.38|1|20.00|
-|Desktops|Washers & Dryers|5|363|1.38|1|20.00|
-|Desktops|Lamps|4|363|1.10|1|25.00|
-|Desktops|Refrigerators|3|363|0.83|0|0.00|
-|Desktops|Fans|3|363|0.83|0|0.00|
-|Digital Cameras|Movie DVD|19|51|37.25|2|10.53|
-|Digital Cameras|Touch Screen Phones |9|51|17.65|1|11.11|
-|Digital Cameras|Desktops|9|51|17.65|3|33.33|
-|Digital Cameras|Smart phones & PDAs |8|51|15.69|1|12.50|
-|Digital Cameras|Laptops|6|51|11.76|1|16.67|
-|Digital Cameras|Download Games|6|51|11.76|0|0.00|
-|Digital Cameras|Home & Office Phones|5|51|9.80|0|0.00|
-|Digital Cameras|Cell phones Accessories|4|51|7.84|0|0.00|
-|Digital Cameras|Printers, Scanners & Fax|4|51|7.84|0|0.00|
-|Digital Cameras|Bluetooth Headphones|4|51|7.84|2|50.00|
-|Digital Cameras|Car Video|3|51|5.88|0|0.00|
-|Digital Cameras|Recording Pen|3|51|5.88|0|0.00|
-|Digital Cameras|Cameras & Camcorders Accessories|3|51|5.88|1|33.33|
-|Digital Cameras|Televisions|3|51|5.88|0|0.00|
-|Digital Cameras|Water Heaters|2|51|3.92|0|0.00|
-|Digital Cameras|Air Conditioners|2|51|3.92|1|50.00|
-|Digital Cameras|Boxed Games|2|51|3.92|1|50.00|
-|Digital Cameras|Computers Accessories|2|51|3.92|1|50.00|
-|Digital Cameras|Digital Cameras|2|51|3.92|0|0.00|
-|Digital Cameras|Monitors|2|51|3.92|0|0.00|
-|Digital Cameras|Projectors & Screens|2|51|3.92|0|0.00|
-|Digital Cameras|VCD & DVD|2|51|3.92|0|0.00|
-|Digital Cameras|Refrigerators|1|51|1.96|0|0.00|
-|Digital Cameras|Lamps|1|51|1.96|0|0.00|
-|Digital Cameras|Home Theater System|1|51|1.96|0|0.00|
-|Digital Cameras|Fans|1|51|1.96|0|0.00|
-|Digital Cameras|Digital SLR Cameras|1|51|1.96|0|0.00|
-|Digital Cameras|Microwaves|1|51|1.96|0|0.00|
-|Digital SLR Cameras|Movie DVD|25|62|40.32|4|16.00|
-|Digital SLR Cameras|Smart phones & PDAs |13|62|20.97|3|23.08|
-|Digital SLR Cameras|Desktops|12|62|19.35|1|8.33|
-|Digital SLR Cameras|Touch Screen Phones |12|62|19.35|2|16.67|
-|Digital SLR Cameras|Boxed Games|8|62|12.90|1|12.50|
-|Digital SLR Cameras|Home & Office Phones|8|62|12.90|1|12.50|
-|Digital SLR Cameras|Download Games|8|62|12.90|3|37.50|
-|Digital SLR Cameras|Printers, Scanners & Fax|7|62|11.29|2|28.57|
-|Digital SLR Cameras|Televisions|7|62|11.29|0|0.00|
-|Digital SLR Cameras|Projectors & Screens|6|62|9.68|0|0.00|
-|Digital SLR Cameras|Cell phones Accessories|6|62|9.68|1|16.67|
-|Digital SLR Cameras|Bluetooth Headphones|3|62|4.84|0|0.00|
-|Digital SLR Cameras|Computers Accessories|3|62|4.84|0|0.00|
-|Digital SLR Cameras|Digital Cameras|3|62|4.84|2|66.67|
-|Digital SLR Cameras|Car Video|3|62|4.84|1|33.33|
-|Digital SLR Cameras|VCD & DVD|3|62|4.84|2|66.67|
-|Digital SLR Cameras|Cameras & Camcorders Accessories|2|62|3.23|1|50.00|
-|Digital SLR Cameras|Digital SLR Cameras|2|62|3.23|0|0.00|
-|Digital SLR Cameras|Fans|2|62|3.23|0|0.00|
-|Digital SLR Cameras|Laptops|2|62|3.23|0|0.00|
-|Digital SLR Cameras|MP4&MP3|2|62|3.23|1|50.00|
-|Digital SLR Cameras|Recording Pen|2|62|3.23|1|50.00|
-|Digital SLR Cameras|Refrigerators|2|62|3.23|1|50.00|
-|Digital SLR Cameras|Air Conditioners|1|62|1.61|0|0.00|
-|Digital SLR Cameras|Lamps|1|62|1.61|0|0.00|
-|Digital SLR Cameras|Monitors|1|62|1.61|0|0.00|
-|Digital SLR Cameras|Microwaves|1|62|1.61|0|0.00|
-|Digital SLR Cameras|Camcorders|1|62|1.61|0|0.00|
-|Digital SLR Cameras|Coffee Machines|1|62|1.61|0|0.00|
-|Download Games|Movie DVD|48|139|34.53|7|14.58|
-|Download Games|Touch Screen Phones |28|139|20.14|3|10.71|
-|Download Games|Desktops|27|139|19.42|1|3.70|
-|Download Games|Smart phones & PDAs |21|139|15.11|2|9.52|
-|Download Games|Laptops|16|139|11.51|2|12.50|
-|Download Games|Projectors & Screens|12|139|8.63|1|8.33|
-|Download Games|Printers, Scanners & Fax|12|139|8.63|2|16.67|
-|Download Games|Download Games|11|139|7.91|1|9.09|
-|Download Games|Boxed Games|11|139|7.91|1|9.09|
-|Download Games|Cell phones Accessories|11|139|7.91|1|9.09|
-|Download Games|Water Heaters|10|139|7.19|2|20.00|
-|Download Games|Home & Office Phones|9|139|6.47|0|0.00|
-|Download Games|Computers Accessories|9|139|6.47|1|11.11|
-|Download Games|Monitors|9|139|6.47|1|11.11|
-|Download Games|Car Video|8|139|5.76|0|0.00|
-|Download Games|Televisions|8|139|5.76|0|0.00|
-|Download Games|Bluetooth Headphones|7|139|5.04|0|0.00|
-|Download Games|Microwaves|6|139|4.32|0|0.00|
-|Download Games|Digital Cameras|6|139|4.32|3|50.00|
-|Download Games|Camcorders|5|139|3.60|1|20.00|
-|Download Games|MP4&MP3|4|139|2.88|1|25.00|
-|Download Games|Digital SLR Cameras|4|139|2.88|0|0.00|
-|Download Games|Home Theater System|4|139|2.88|0|0.00|
-|Download Games|Lamps|4|139|2.88|0|0.00|
-|Download Games|Recording Pen|4|139|2.88|1|25.00|
-|Download Games|Washers & Dryers|2|139|1.44|0|0.00|
-|Download Games|Air Conditioners|2|139|1.44|0|0.00|
-|Download Games|Refrigerators|1|139|0.72|0|0.00|
-|Download Games|Cameras & Camcorders Accessories|1|139|0.72|1|100.00|
-|Download Games|Coffee Machines|1|139|0.72|0|0.00|
-|Fans|Movie DVD|11|28|39.29|1|9.09|
-|Fans|Smart phones & PDAs |7|28|25.00|1|14.29|
-|Fans|Touch Screen Phones |6|28|21.43|0|0.00|
-|Fans|Download Games|4|28|14.29|1|25.00|
-|Fans|Desktops|4|28|14.29|2|50.00|
-|Fans|Home & Office Phones|3|28|10.71|0|0.00|
-|Fans|Monitors|3|28|10.71|0|0.00|
-|Fans|Water Heaters|2|28|7.14|0|0.00|
-|Fans|Computers Accessories|2|28|7.14|0|0.00|
-|Fans|Laptops|2|28|7.14|0|0.00|
-|Fans|Microwaves|2|28|7.14|0|0.00|
-|Fans|Boxed Games|2|28|7.14|0|0.00|
-|Fans|Printers, Scanners & Fax|2|28|7.14|0|0.00|
-|Fans|Projectors & Screens|2|28|7.14|0|0.00|
-|Fans|Bluetooth Headphones|2|28|7.14|1|50.00|
-|Fans|MP4&MP3|1|28|3.57|0|0.00|
-|Fans|VCD & DVD|1|28|3.57|0|0.00|
-|Fans|Washers & Dryers|1|28|3.57|0|0.00|
-|Fans|Recording Pen|1|28|3.57|0|0.00|
-|Fans|Digital SLR Cameras|1|28|3.57|0|0.00|
-|Fans|Lamps|1|28|3.57|0|0.00|
-|Fans|Camcorders|1|28|3.57|0|0.00|
-|Fans|Televisions|1|28|3.57|0|0.00|
-|Fans|Digital Cameras|1|28|3.57|1|100.00|
-|Fans|Cameras & Camcorders Accessories|1|28|3.57|1|100.00|
-|Home & Office Phones|Movie DVD|57|150|38.00|9|15.79|
-|Home & Office Phones|Touch Screen Phones |28|150|18.67|3|10.71|
-|Home & Office Phones|Smart phones & PDAs |27|150|18.00|3|11.11|
-|Home & Office Phones|Desktops|26|150|17.33|3|11.54|
-|Home & Office Phones|Boxed Games|19|150|12.67|3|15.79|
-|Home & Office Phones|Download Games|16|150|10.67|2|12.50|
-|Home & Office Phones|Home & Office Phones|15|150|10.00|3|20.00|
-|Home & Office Phones|Cell phones Accessories|14|150|9.33|2|14.29|
-|Home & Office Phones|Printers, Scanners & Fax|13|150|8.67|3|23.08|
-|Home & Office Phones|Projectors & Screens|12|150|8.00|0|0.00|
-|Home & Office Phones|Computers Accessories|11|150|7.33|0|0.00|
-|Home & Office Phones|Televisions|11|150|7.33|2|18.18|
-|Home & Office Phones|Monitors|11|150|7.33|3|27.27|
-|Home & Office Phones|Laptops|11|150|7.33|2|18.18|
-|Home & Office Phones|Water Heaters|10|150|6.67|3|30.00|
-|Home & Office Phones|Bluetooth Headphones|9|150|6.00|0|0.00|
-|Home & Office Phones|Microwaves|8|150|5.33|1|12.50|
-|Home & Office Phones|Refrigerators|6|150|4.00|0|0.00|
-|Home & Office Phones|Car Video|6|150|4.00|1|16.67|
-|Home & Office Phones|Camcorders|6|150|4.00|0|0.00|
-|Home & Office Phones|Coffee Machines|5|150|3.33|0|0.00|
-|Home & Office Phones|Digital SLR Cameras|4|150|2.67|0|0.00|
-|Home & Office Phones|Recording Pen|4|150|2.67|0|0.00|
-|Home & Office Phones|Lamps|3|150|2.00|0|0.00|
-|Home & Office Phones|Cameras & Camcorders Accessories|3|150|2.00|1|33.33|
-|Home & Office Phones|Digital Cameras|3|150|2.00|0|0.00|
-|Home & Office Phones|Home Theater System|3|150|2.00|1|33.33|
-|Home & Office Phones|Washers & Dryers|3|150|2.00|2|66.67|
-|Home & Office Phones|Air Conditioners|2|150|1.33|0|0.00|
-|Home & Office Phones|Fans|2|150|1.33|0|0.00|
-|Home & Office Phones|VCD & DVD|1|150|0.67|0|0.00|
-|Home & Office Phones|MP4&MP3|1|150|0.67|1|100.00|
-|Home Theater System|Movie DVD|15|42|35.71|2|13.33|
-|Home Theater System|Desktops|8|42|19.05|1|12.50|
-|Home Theater System|Smart phones & PDAs |8|42|19.05|0|0.00|
-|Home Theater System|Touch Screen Phones |5|42|11.90|0|0.00|
-|Home Theater System|Televisions|4|42|9.52|0|0.00|
-|Home Theater System|Boxed Games|4|42|9.52|0|0.00|
-|Home Theater System|Home & Office Phones|4|42|9.52|1|25.00|
-|Home Theater System|Bluetooth Headphones|4|42|9.52|0|0.00|
-|Home Theater System|Computers Accessories|4|42|9.52|0|0.00|
-|Home Theater System|Printers, Scanners & Fax|4|42|9.52|0|0.00|
-|Home Theater System|Download Games|4|42|9.52|1|25.00|
-|Home Theater System|VCD & DVD|3|42|7.14|0|0.00|
-|Home Theater System|Monitors|3|42|7.14|1|33.33|
-|Home Theater System|Cell phones Accessories|3|42|7.14|0|0.00|
-|Home Theater System|Projectors & Screens|3|42|7.14|0|0.00|
-|Home Theater System|Laptops|3|42|7.14|0|0.00|
-|Home Theater System|Washers & Dryers|2|42|4.76|0|0.00|
-|Home Theater System|Cameras & Camcorders Accessories|2|42|4.76|0|0.00|
-|Home Theater System|Car Video|2|42|4.76|0|0.00|
-|Home Theater System|Water Heaters|1|42|2.38|0|0.00|
-|Home Theater System|Camcorders|1|42|2.38|0|0.00|
-|Home Theater System|Microwaves|1|42|2.38|0|0.00|
-|Home Theater System|Refrigerators|1|42|2.38|1|100.00|
-|Lamps|Movie DVD|11|26|42.31|2|18.18|
-|Lamps|Download Games|5|26|19.23|1|20.00|
-|Lamps|Home & Office Phones|5|26|19.23|0|0.00|
-|Lamps|Desktops|5|26|19.23|0|0.00|
-|Lamps|Touch Screen Phones |5|26|19.23|2|40.00|
-|Lamps|Printers, Scanners & Fax|5|26|19.23|2|40.00|
-|Lamps|Computers Accessories|5|26|19.23|1|20.00|
-|Lamps|Cell phones Accessories|4|26|15.38|0|0.00|
-|Lamps|Smart phones & PDAs |4|26|15.38|1|25.00|
-|Lamps|Monitors|3|26|11.54|1|33.33|
-|Lamps|Televisions|3|26|11.54|1|33.33|
-|Lamps|Projectors & Screens|3|26|11.54|0|0.00|
-|Lamps|Boxed Games|2|26|7.69|0|0.00|
-|Lamps|Coffee Machines|2|26|7.69|0|0.00|
-|Lamps|Refrigerators|2|26|7.69|0|0.00|
-|Lamps|Water Heaters|1|26|3.85|0|0.00|
-|Lamps|Camcorders|1|26|3.85|1|100.00|
-|Lamps|Cameras & Camcorders Accessories|1|26|3.85|0|0.00|
-|Lamps|Digital Cameras|1|26|3.85|0|0.00|
-|Lamps|Digital SLR Cameras|1|26|3.85|0|0.00|
-|Lamps|Fans|1|26|3.85|0|0.00|
-|Lamps|Home Theater System|1|26|3.85|0|0.00|
-|Lamps|Laptops|1|26|3.85|0|0.00|
-|Lamps|Recording Pen|1|26|3.85|0|0.00|
-|Lamps|Washers & Dryers|1|26|3.85|0|0.00|
-|Laptops|Movie DVD|55|149|36.91|6|10.91|
-|Laptops|Desktops|29|149|19.46|5|17.24|
-|Laptops|Smart phones & PDAs |25|149|16.78|4|16.00|
-|Laptops|Boxed Games|21|149|14.09|5|23.81|
-|Laptops|Touch Screen Phones |21|149|14.09|6|28.57|
-|Laptops|Download Games|15|149|10.07|4|26.67|
-|Laptops|Printers, Scanners & Fax|15|149|10.07|2|13.33|
-|Laptops|Projectors & Screens|14|149|9.40|2|14.29|
-|Laptops|Cell phones Accessories|12|149|8.05|0|0.00|
-|Laptops|Monitors|12|149|8.05|0|0.00|
-|Laptops|Computers Accessories|10|149|6.71|1|10.00|
-|Laptops|Water Heaters|10|149|6.71|2|20.00|
-|Laptops|Laptops|9|149|6.04|0|0.00|
-|Laptops|Televisions|9|149|6.04|1|11.11|
-|Laptops|Home & Office Phones|8|149|5.37|1|12.50|
-|Laptops|Bluetooth Headphones|8|149|5.37|1|12.50|
-|Laptops|Digital SLR Cameras|7|149|4.70|1|14.29|
-|Laptops|Air Conditioners|6|149|4.03|2|33.33|
-|Laptops|Home Theater System|6|149|4.03|0|0.00|
-|Laptops|Microwaves|5|149|3.36|1|20.00|
-|Laptops|Refrigerators|5|149|3.36|3|60.00|
-|Laptops|Car Video|5|149|3.36|1|20.00|
-|Laptops|VCD & DVD|4|149|2.68|1|25.00|
-|Laptops|Recording Pen|3|149|2.01|0|0.00|
-|Laptops|Fans|3|149|2.01|0|0.00|
-|Laptops|Coffee Machines|3|149|2.01|0|0.00|
-|Laptops|Camcorders|3|149|2.01|0|0.00|
-|Laptops|Lamps|3|149|2.01|0|0.00|
-|Laptops|Cameras & Camcorders Accessories|2|149|1.34|0|0.00|
-|Laptops|Digital Cameras|2|149|1.34|0|0.00|
-|Laptops|MP4&MP3|2|149|1.34|0|0.00|
-|Laptops|Washers & Dryers|1|149|0.67|0|0.00|
-|Microwaves|Movie DVD|31|83|37.35|2|6.45|
-|Microwaves|Desktops|16|83|19.28|1|6.25|
-|Microwaves|Smart phones & PDAs |16|83|19.28|0|0.00|
-|Microwaves|Touch Screen Phones |16|83|19.28|0|0.00|
-|Microwaves|Boxed Games|8|83|9.64|1|12.50|
-|Microwaves|Water Heaters|8|83|9.64|1|12.50|
-|Microwaves|Computers Accessories|8|83|9.64|1|12.50|
-|Microwaves|Home & Office Phones|7|83|8.43|1|14.29|
-|Microwaves|Monitors|7|83|8.43|1|14.29|
-|Microwaves|Cell phones Accessories|6|83|7.23|1|16.67|
-|Microwaves|Digital SLR Cameras|5|83|6.02|1|20.00|
-|Microwaves|Download Games|5|83|6.02|0|0.00|
-|Microwaves|Televisions|5|83|6.02|1|20.00|
-|Microwaves|Projectors & Screens|5|83|6.02|1|20.00|
-|Microwaves|Printers, Scanners & Fax|4|83|4.82|0|0.00|
-|Microwaves|Recording Pen|4|83|4.82|1|25.00|
-|Microwaves|Home Theater System|3|83|3.61|0|0.00|
-|Microwaves|Camcorders|3|83|3.61|0|0.00|
-|Microwaves|Cameras & Camcorders Accessories|3|83|3.61|0|0.00|
-|Microwaves|Bluetooth Headphones|3|83|3.61|0|0.00|
-|Microwaves|Microwaves|3|83|3.61|0|0.00|
-|Microwaves|MP4&MP3|3|83|3.61|0|0.00|
-|Microwaves|Laptops|2|83|2.41|0|0.00|
-|Microwaves|Refrigerators|2|83|2.41|0|0.00|
-|Microwaves|Lamps|2|83|2.41|0|0.00|
-|Microwaves|VCD & DVD|2|83|2.41|0|0.00|
-|Microwaves|Air Conditioners|2|83|2.41|0|0.00|
-|Microwaves|Car Video|1|83|1.20|0|0.00|
-|Microwaves|Coffee Machines|1|83|1.20|0|0.00|
-|Monitors|Movie DVD|51|149|34.23|4|7.84|
-|Monitors|Smart phones & PDAs |32|149|21.48|4|12.50|
-|Monitors|Touch Screen Phones |31|149|20.81|2|6.45|
-|Monitors|Projectors & Screens|17|149|11.41|2|11.76|
-|Monitors|Desktops|17|149|11.41|3|17.65|
-|Monitors|Monitors|17|149|11.41|2|11.76|
-|Monitors|Download Games|16|149|10.74|3|18.75|
-|Monitors|Home & Office Phones|14|149|9.40|1|7.14|
-|Monitors|Laptops|13|149|8.72|0|0.00|
-|Monitors|Cell phones Accessories|11|149|7.38|1|9.09|
-|Monitors|Printers, Scanners & Fax|11|149|7.38|3|27.27|
-|Monitors|Televisions|10|149|6.71|2|20.00|
-|Monitors|Bluetooth Headphones|9|149|6.04|3|33.33|
-|Monitors|Microwaves|8|149|5.37|2|25.00|
-|Monitors|Boxed Games|7|149|4.70|2|28.57|
-|Monitors|VCD & DVD|6|149|4.03|0|0.00|
-|Monitors|Computers Accessories|6|149|4.03|1|16.67|
-|Monitors|Digital SLR Cameras|5|149|3.36|1|20.00|
-|Monitors|Fans|5|149|3.36|0|0.00|
-|Monitors|Digital Cameras|5|149|3.36|1|20.00|
-|Monitors|Cameras & Camcorders Accessories|5|149|3.36|1|20.00|
-|Monitors|Home Theater System|4|149|2.68|1|25.00|
-|Monitors|Refrigerators|4|149|2.68|0|0.00|
-|Monitors|Water Heaters|3|149|2.01|0|0.00|
-|Monitors|Car Video|3|149|2.01|0|0.00|
-|Monitors|Recording Pen|3|149|2.01|1|33.33|
-|Monitors|Air Conditioners|3|149|2.01|0|0.00|
-|Monitors|Washers & Dryers|3|149|2.01|0|0.00|
-|Monitors|Lamps|2|149|1.34|0|0.00|
-|Monitors|Coffee Machines|2|149|1.34|0|0.00|
-|Monitors|Camcorders|2|149|1.34|1|50.00|
-|Monitors|MP4&MP3|2|149|1.34|0|0.00|
-|Movie DVD|Movie DVD|231|609|37.93|26|11.26|
-|Movie DVD|Desktops|118|609|19.38|18|15.25|
-|Movie DVD|Smart phones & PDAs |110|609|18.06|14|12.73|
-|Movie DVD|Touch Screen Phones |106|609|17.41|13|12.26|
-|Movie DVD|Boxed Games|77|609|12.64|16|20.78|
-|Movie DVD|Cell phones Accessories|57|609|9.36|6|10.53|
-|Movie DVD|Download Games|57|609|9.36|6|10.53|
-|Movie DVD|Home & Office Phones|53|609|8.70|9|16.98|
-|Movie DVD|Projectors & Screens|49|609|8.05|2|4.08|
-|Movie DVD|Printers, Scanners & Fax|47|609|7.72|10|21.28|
-|Movie DVD|Laptops|45|609|7.39|10|22.22|
-|Movie DVD|Monitors|41|609|6.73|3|7.32|
-|Movie DVD|Computers Accessories|41|609|6.73|4|9.76|
-|Movie DVD|Televisions|40|609|6.57|4|10.00|
-|Movie DVD|Water Heaters|30|609|4.93|1|3.33|
-|Movie DVD|Bluetooth Headphones|29|609|4.76|7|24.14|
-|Movie DVD|Car Video|27|609|4.43|5|18.52|
-|Movie DVD|Recording Pen|23|609|3.78|2|8.70|
-|Movie DVD|VCD & DVD|23|609|3.78|2|8.70|
-|Movie DVD|Digital SLR Cameras|22|609|3.61|5|22.73|
-|Movie DVD|Digital Cameras|21|609|3.45|5|23.81|
-|Movie DVD|Microwaves|18|609|2.96|1|5.56|
-|Movie DVD|Cameras & Camcorders Accessories|18|609|2.96|4|22.22|
-|Movie DVD|Air Conditioners|16|609|2.63|5|31.25|
-|Movie DVD|MP4&MP3|16|609|2.63|2|12.50|
-|Movie DVD|Home Theater System|13|609|2.13|2|15.38|
-|Movie DVD|Camcorders|12|609|1.97|1|8.33|
-|Movie DVD|Lamps|12|609|1.97|3|25.00|
-|Movie DVD|Washers & Dryers|12|609|1.97|2|16.67|
-|Movie DVD|Coffee Machines|11|609|1.81|0|0.00|
-|Movie DVD|Refrigerators|9|609|1.48|3|33.33|
-|Movie DVD|Fans|7|609|1.15|0|0.00|
-|MP4&MP3|Movie DVD|12|37|32.43|0|0.00|
-|MP4&MP3|Smart phones & PDAs |9|37|24.32|0|0.00|
-|MP4&MP3|Touch Screen Phones |7|37|18.92|3|42.86|
-|MP4&MP3|Download Games|7|37|18.92|2|28.57|
-|MP4&MP3|Projectors & Screens|5|37|13.51|0|0.00|
-|MP4&MP3|Desktops|5|37|13.51|1|20.00|
-|MP4&MP3|Printers, Scanners & Fax|5|37|13.51|0|0.00|
-|MP4&MP3|Televisions|4|37|10.81|1|25.00|
-|MP4&MP3|Cell phones Accessories|4|37|10.81|0|0.00|
-|MP4&MP3|Boxed Games|4|37|10.81|0|0.00|
-|MP4&MP3|VCD & DVD|3|37|8.11|1|33.33|
-|MP4&MP3|Air Conditioners|3|37|8.11|0|0.00|
-|MP4&MP3|Home Theater System|3|37|8.11|0|0.00|
-|MP4&MP3|Laptops|3|37|8.11|0|0.00|
-|MP4&MP3|Monitors|3|37|8.11|0|0.00|
-|MP4&MP3|Bluetooth Headphones|2|37|5.41|0|0.00|
-|MP4&MP3|Car Video|2|37|5.41|0|0.00|
-|MP4&MP3|Computers Accessories|2|37|5.41|0|0.00|
-|MP4&MP3|Microwaves|2|37|5.41|0|0.00|
-|MP4&MP3|Washers & Dryers|2|37|5.41|0|0.00|
-|MP4&MP3|Home & Office Phones|1|37|2.70|0|0.00|
-|MP4&MP3|Coffee Machines|1|37|2.70|1|100.00|
-|MP4&MP3|Cameras & Camcorders Accessories|1|37|2.70|0|0.00|
-|MP4&MP3|Water Heaters|1|37|2.70|0|0.00|
-|MP4&MP3|Digital SLR Cameras|1|37|2.70|0|0.00|
-|Printers, Scanners & Fax|Movie DVD|44|124|35.48|6|13.64|
-|Printers, Scanners & Fax|Touch Screen Phones |26|124|20.97|1|3.85|
-|Printers, Scanners & Fax|Smart phones & PDAs |18|124|14.52|0|0.00|
-|Printers, Scanners & Fax|Desktops|16|124|12.90|3|18.75|
-|Printers, Scanners & Fax|Boxed Games|16|124|12.90|2|12.50|
-|Printers, Scanners & Fax|Televisions|16|124|12.90|4|25.00|
-|Printers, Scanners & Fax|Printers, Scanners & Fax|14|124|11.29|3|21.43|
-|Printers, Scanners & Fax|Download Games|13|124|10.48|0|0.00|
-|Printers, Scanners & Fax|Home & Office Phones|13|124|10.48|1|7.69|
-|Printers, Scanners & Fax|Cell phones Accessories|12|124|9.68|1|8.33|
-|Printers, Scanners & Fax|Projectors & Screens|12|124|9.68|2|16.67|
-|Printers, Scanners & Fax|Laptops|11|124|8.87|4|36.36|
-|Printers, Scanners & Fax|Computers Accessories|11|124|8.87|0|0.00|
-|Printers, Scanners & Fax|Monitors|9|124|7.26|2|22.22|
-|Printers, Scanners & Fax|Digital Cameras|7|124|5.65|4|57.14|
-|Printers, Scanners & Fax|Bluetooth Headphones|6|124|4.84|0|0.00|
-|Printers, Scanners & Fax|Microwaves|6|124|4.84|0|0.00|
-|Printers, Scanners & Fax|Water Heaters|6|124|4.84|1|16.67|
-|Printers, Scanners & Fax|VCD & DVD|5|124|4.03|2|40.00|
-|Printers, Scanners & Fax|Recording Pen|5|124|4.03|3|60.00|
-|Printers, Scanners & Fax|MP4&MP3|4|124|3.23|0|0.00|
-|Printers, Scanners & Fax|Digital SLR Cameras|4|124|3.23|1|25.00|
-|Printers, Scanners & Fax|Car Video|2|124|1.61|1|50.00|
-|Printers, Scanners & Fax|Air Conditioners|2|124|1.61|0|0.00|
-|Printers, Scanners & Fax|Washers & Dryers|2|124|1.61|0|0.00|
-|Printers, Scanners & Fax|Cameras & Camcorders Accessories|1|124|0.81|0|0.00|
-|Printers, Scanners & Fax|Lamps|1|124|0.81|0|0.00|
-|Printers, Scanners & Fax|Refrigerators|1|124|0.81|0|0.00|
-|Printers, Scanners & Fax|Camcorders|1|124|0.81|0|0.00|
-|Projectors & Screens|Movie DVD|54|147|36.73|5|9.26|
-|Projectors & Screens|Smart phones & PDAs |34|147|23.13|3|8.82|
-|Projectors & Screens|Touch Screen Phones |32|147|21.77|4|12.50|
-|Projectors & Screens|Desktops|24|147|16.33|2|8.33|
-|Projectors & Screens|Boxed Games|18|147|12.24|3|16.67|
-|Projectors & Screens|Download Games|16|147|10.88|3|18.75|
-|Projectors & Screens|Cell phones Accessories|14|147|9.52|2|14.29|
-|Projectors & Screens|Printers, Scanners & Fax|12|147|8.16|1|8.33|
-|Projectors & Screens|Laptops|12|147|8.16|1|8.33|
-|Projectors & Screens|Projectors & Screens|11|147|7.48|0|0.00|
-|Projectors & Screens|Televisions|10|147|6.80|0|0.00|
-|Projectors & Screens|Home & Office Phones|9|147|6.12|2|22.22|
-|Projectors & Screens|Monitors|9|147|6.12|0|0.00|
-|Projectors & Screens|Bluetooth Headphones|9|147|6.12|1|11.11|
-|Projectors & Screens|Computers Accessories|9|147|6.12|2|22.22|
-|Projectors & Screens|Recording Pen|7|147|4.76|1|14.29|
-|Projectors & Screens|Car Video|7|147|4.76|0|0.00|
-|Projectors & Screens|VCD & DVD|6|147|4.08|0|0.00|
-|Projectors & Screens|Washers & Dryers|6|147|4.08|0|0.00|
-|Projectors & Screens|Digital SLR Cameras|5|147|3.40|2|40.00|
-|Projectors & Screens|Water Heaters|5|147|3.40|0|0.00|
-|Projectors & Screens|Lamps|4|147|2.72|1|25.00|
-|Projectors & Screens|Coffee Machines|4|147|2.72|0|0.00|
-|Projectors & Screens|Home Theater System|4|147|2.72|1|25.00|
-|Projectors & Screens|Camcorders|3|147|2.04|0|0.00|
-|Projectors & Screens|Refrigerators|3|147|2.04|1|33.33|
-|Projectors & Screens|Air Conditioners|3|147|2.04|0|0.00|
-|Projectors & Screens|Fans|3|147|2.04|0|0.00|
-|Projectors & Screens|MP4&MP3|2|147|1.36|0|0.00|
-|Projectors & Screens|Microwaves|2|147|1.36|0|0.00|
-|Projectors & Screens|Cameras & Camcorders Accessories|2|147|1.36|0|0.00|
-|Projectors & Screens|Digital Cameras|1|147|0.68|0|0.00|
-|Recording Pen|Movie DVD|19|48|39.58|2|10.53|
-|Recording Pen|Boxed Games|13|48|27.08|0|0.00|
-|Recording Pen|Smart phones & PDAs |10|48|20.83|1|10.00|
-|Recording Pen|Desktops|9|48|18.75|1|11.11|
-|Recording Pen|Projectors & Screens|8|48|16.67|0|0.00|
-|Recording Pen|Touch Screen Phones |6|48|12.50|2|33.33|
-|Recording Pen|Printers, Scanners & Fax|5|48|10.42|2|40.00|
-|Recording Pen|Home & Office Phones|5|48|10.42|0|0.00|
-|Recording Pen|Digital SLR Cameras|4|48|8.33|0|0.00|
-|Recording Pen|VCD & DVD|4|48|8.33|0|0.00|
-|Recording Pen|Water Heaters|3|48|6.25|0|0.00|
-|Recording Pen|Microwaves|3|48|6.25|0|0.00|
-|Recording Pen|Bluetooth Headphones|2|48|4.17|0|0.00|
-|Recording Pen|Cameras & Camcorders Accessories|2|48|4.17|1|50.00|
-|Recording Pen|Car Video|2|48|4.17|0|0.00|
-|Recording Pen|Cell phones Accessories|2|48|4.17|1|50.00|
-|Recording Pen|Computers Accessories|2|48|4.17|0|0.00|
-|Recording Pen|Fans|2|48|4.17|0|0.00|
-|Recording Pen|Laptops|2|48|4.17|0|0.00|
-|Recording Pen|Recording Pen|2|48|4.17|1|50.00|
-|Recording Pen|Washers & Dryers|2|48|4.17|0|0.00|
-|Recording Pen|Monitors|1|48|2.08|0|0.00|
-|Recording Pen|Televisions|1|48|2.08|0|0.00|
-|Recording Pen|Digital Cameras|1|48|2.08|0|0.00|
-|Recording Pen|Coffee Machines|1|48|2.08|0|0.00|
-|Recording Pen|Lamps|1|48|2.08|0|0.00|
-|Recording Pen|Camcorders|1|48|2.08|0|0.00|
-|Refrigerators|Movie DVD|17|53|32.08|1|5.88|
-|Refrigerators|Smart phones & PDAs |13|53|24.53|3|23.08|
-|Refrigerators|Touch Screen Phones |11|53|20.75|1|9.09|
-|Refrigerators|Desktops|8|53|15.09|0|0.00|
-|Refrigerators|Laptops|6|53|11.32|1|16.67|
-|Refrigerators|Printers, Scanners & Fax|6|53|11.32|0|0.00|
-|Refrigerators|Bluetooth Headphones|6|53|11.32|0|0.00|
-|Refrigerators|Cell phones Accessories|5|53|9.43|0|0.00|
-|Refrigerators|Monitors|5|53|9.43|0|0.00|
-|Refrigerators|Boxed Games|4|53|7.55|1|25.00|
-|Refrigerators|Projectors & Screens|4|53|7.55|0|0.00|
-|Refrigerators|Home & Office Phones|4|53|7.55|0|0.00|
-|Refrigerators|Water Heaters|3|53|5.66|0|0.00|
-|Refrigerators|Car Video|3|53|5.66|0|0.00|
-|Refrigerators|Download Games|3|53|5.66|0|0.00|
-|Refrigerators|Televisions|3|53|5.66|0|0.00|
-|Refrigerators|Refrigerators|2|53|3.77|0|0.00|
-|Refrigerators|Air Conditioners|2|53|3.77|0|0.00|
-|Refrigerators|Digital Cameras|2|53|3.77|0|0.00|
-|Refrigerators|Home Theater System|2|53|3.77|0|0.00|
-|Refrigerators|Computers Accessories|2|53|3.77|1|50.00|
-|Refrigerators|Recording Pen|2|53|3.77|0|0.00|
-|Refrigerators|Microwaves|1|53|1.89|0|0.00|
-|Refrigerators|Fans|1|53|1.89|0|0.00|
-|Refrigerators|Camcorders|1|53|1.89|0|0.00|
-|Refrigerators|MP4&MP3|1|53|1.89|0|0.00|
-|Smart phones & PDAs |Movie DVD|113|342|33.04|11|9.73|
-|Smart phones & PDAs |Smart phones & PDAs |59|342|17.25|8|13.56|
-|Smart phones & PDAs |Touch Screen Phones |59|342|17.25|5|8.47|
-|Smart phones & PDAs |Desktops|58|342|16.96|10|17.24|
-|Smart phones & PDAs |Laptops|40|342|11.70|5|12.50|
-|Smart phones & PDAs |Download Games|37|342|10.82|4|10.81|
-|Smart phones & PDAs |Boxed Games|36|342|10.53|7|19.44|
-|Smart phones & PDAs |Cell phones Accessories|33|342|9.65|4|12.12|
-|Smart phones & PDAs |Computers Accessories|29|342|8.48|3|10.34|
-|Smart phones & PDAs |Home & Office Phones|27|342|7.89|5|18.52|
-|Smart phones & PDAs |Monitors|26|342|7.60|3|11.54|
-|Smart phones & PDAs |Printers, Scanners & Fax|26|342|7.60|5|19.23|
-|Smart phones & PDAs |Televisions|25|342|7.31|7|28.00|
-|Smart phones & PDAs |Projectors & Screens|24|342|7.02|1|4.17|
-|Smart phones & PDAs |Bluetooth Headphones|21|342|6.14|6|28.57|
-|Smart phones & PDAs |Recording Pen|18|342|5.26|2|11.11|
-|Smart phones & PDAs |Water Heaters|18|342|5.26|1|5.56|
-|Smart phones & PDAs |Microwaves|16|342|4.68|0|0.00|
-|Smart phones & PDAs |Car Video|13|342|3.80|3|23.08|
-|Smart phones & PDAs |Digital SLR Cameras|9|342|2.63|0|0.00|
-|Smart phones & PDAs |Coffee Machines|8|342|2.34|1|12.50|
-|Smart phones & PDAs |Digital Cameras|8|342|2.34|1|12.50|
-|Smart phones & PDAs |VCD & DVD|8|342|2.34|2|25.00|
-|Smart phones & PDAs |Refrigerators|7|342|2.05|1|14.29|
-|Smart phones & PDAs |Lamps|5|342|1.46|2|40.00|
-|Smart phones & PDAs |Cameras & Camcorders Accessories|5|342|1.46|1|20.00|
-|Smart phones & PDAs |Home Theater System|5|342|1.46|1|20.00|
-|Smart phones & PDAs |Air Conditioners|5|342|1.46|0|0.00|
-|Smart phones & PDAs |MP4&MP3|5|342|1.46|0|0.00|
-|Smart phones & PDAs |Washers & Dryers|4|342|1.17|0|0.00|
-|Smart phones & PDAs |Camcorders|4|342|1.17|1|25.00|
-|Smart phones & PDAs |Fans|3|342|0.88|0|0.00|
-|Televisions|Movie DVD|53|158|33.54|9|16.98|
-|Televisions|Touch Screen Phones |31|158|19.62|8|25.81|
-|Televisions|Smart phones & PDAs |25|158|15.82|2|8.00|
-|Televisions|Desktops|22|158|13.92|3|13.64|
-|Televisions|Boxed Games|17|158|10.76|3|17.65|
-|Televisions|Monitors|16|158|10.13|4|25.00|
-|Televisions|Download Games|15|158|9.49|5|33.33|
-|Televisions|Televisions|15|158|9.49|3|20.00|
-|Televisions|Projectors & Screens|13|158|8.23|1|7.69|
-|Televisions|Cell phones Accessories|13|158|8.23|2|15.38|
-|Televisions|Printers, Scanners & Fax|12|158|7.59|2|16.67|
-|Televisions|Microwaves|11|158|6.96|1|9.09|
-|Televisions|Computers Accessories|11|158|6.96|2|18.18|
-|Televisions|Car Video|10|158|6.33|2|20.00|
-|Televisions|Laptops|10|158|6.33|1|10.00|
-|Televisions|Water Heaters|9|158|5.70|2|22.22|
-|Televisions|Home & Office Phones|8|158|5.06|2|25.00|
-|Televisions|Home Theater System|7|158|4.43|2|28.57|
-|Televisions|Bluetooth Headphones|7|158|4.43|2|28.57|
-|Televisions|Digital Cameras|6|158|3.80|3|50.00|
-|Televisions|Recording Pen|5|158|3.16|0|0.00|
-|Televisions|Washers & Dryers|4|158|2.53|0|0.00|
-|Televisions|VCD & DVD|4|158|2.53|0|0.00|
-|Televisions|Coffee Machines|4|158|2.53|0|0.00|
-|Televisions|Cameras & Camcorders Accessories|4|158|2.53|3|75.00|
-|Televisions|Lamps|3|158|1.90|1|33.33|
-|Televisions|Air Conditioners|2|158|1.27|0|0.00|
-|Televisions|MP4&MP3|2|158|1.27|1|50.00|
-|Televisions|Digital SLR Cameras|1|158|0.63|1|100.00|
-|Televisions|Fans|1|158|0.63|0|0.00|
-|Televisions|Refrigerators|1|158|0.63|0|0.00|
-|Touch Screen Phones |Movie DVD|106|309|34.30|23|21.70|
-|Touch Screen Phones |Smart phones & PDAs |67|309|21.68|11|16.42|
-|Touch Screen Phones |Desktops|56|309|18.12|9|16.07|
-|Touch Screen Phones |Touch Screen Phones |54|309|17.48|11|20.37|
-|Touch Screen Phones |Boxed Games|50|309|16.18|8|16.00|
-|Touch Screen Phones |Download Games|31|309|10.03|6|19.35|
-|Touch Screen Phones |Printers, Scanners & Fax|29|309|9.39|3|10.34|
-|Touch Screen Phones |Televisions|29|309|9.39|7|24.14|
-|Touch Screen Phones |Cell phones Accessories|28|309|9.06|4|14.29|
-|Touch Screen Phones |Projectors & Screens|23|309|7.44|4|17.39|
-|Touch Screen Phones |Home & Office Phones|21|309|6.80|2|9.52|
-|Touch Screen Phones |Monitors|19|309|6.15|2|10.53|
-|Touch Screen Phones |Laptops|17|309|5.50|4|23.53|
-|Touch Screen Phones |Bluetooth Headphones|16|309|5.18|2|12.50|
-|Touch Screen Phones |Water Heaters|14|309|4.53|3|21.43|
-|Touch Screen Phones |Recording Pen|14|309|4.53|1|7.14|
-|Touch Screen Phones |Digital SLR Cameras|13|309|4.21|1|7.69|
-|Touch Screen Phones |Cameras & Camcorders Accessories|12|309|3.88|3|25.00|
-|Touch Screen Phones |Car Video|11|309|3.56|5|45.45|
-|Touch Screen Phones |Computers Accessories|11|309|3.56|2|18.18|
-|Touch Screen Phones |VCD & DVD|10|309|3.24|1|10.00|
-|Touch Screen Phones |Microwaves|10|309|3.24|0|0.00|
-|Touch Screen Phones |Air Conditioners|10|309|3.24|1|10.00|
-|Touch Screen Phones |Lamps|7|309|2.27|0|0.00|
-|Touch Screen Phones |Refrigerators|7|309|2.27|1|14.29|
-|Touch Screen Phones |MP4&MP3|6|309|1.94|2|33.33|
-|Touch Screen Phones |Digital Cameras|6|309|1.94|2|33.33|
-|Touch Screen Phones |Washers & Dryers|5|309|1.62|2|40.00|
-|Touch Screen Phones |Camcorders|4|309|1.29|0|0.00|
-|Touch Screen Phones |Coffee Machines|4|309|1.29|1|25.00|
-|Touch Screen Phones |Home Theater System|3|309|0.97|0|0.00|
-|Touch Screen Phones |Fans|3|309|0.97|0|0.00|
-|VCD & DVD|Movie DVD|28|73|38.36|7|25.00|
-|VCD & DVD|Touch Screen Phones |13|73|17.81|2|15.38|
-|VCD & DVD|Smart phones & PDAs |12|73|16.44|3|25.00|
-|VCD & DVD|Desktops|11|73|15.07|3|27.27|
-|VCD & DVD|Boxed Games|11|73|15.07|4|36.36|
-|VCD & DVD|Home & Office Phones|9|73|12.33|1|11.11|
-|VCD & DVD|Monitors|6|73|8.22|1|16.67|
-|VCD & DVD|Projectors & Screens|5|73|6.85|1|20.00|
-|VCD & DVD|Printers, Scanners & Fax|5|73|6.85|1|20.00|
-|VCD & DVD|Car Video|5|73|6.85|2|40.00|
-|VCD & DVD|Water Heaters|5|73|6.85|1|20.00|
-|VCD & DVD|Download Games|5|73|6.85|2|40.00|
-|VCD & DVD|Digital Cameras|4|73|5.48|1|25.00|
-|VCD & DVD|Computers Accessories|4|73|5.48|1|25.00|
-|VCD & DVD|Cell phones Accessories|4|73|5.48|0|0.00|
-|VCD & DVD|MP4&MP3|3|73|4.11|1|33.33|
-|VCD & DVD|Refrigerators|3|73|4.11|1|33.33|
-|VCD & DVD|Digital SLR Cameras|3|73|4.11|0|0.00|
-|VCD & DVD|Televisions|3|73|4.11|0|0.00|
-|VCD & DVD|Laptops|3|73|4.11|0|0.00|
-|VCD & DVD|Fans|2|73|2.74|0|0.00|
-|VCD & DVD|Bluetooth Headphones|2|73|2.74|0|0.00|
-|VCD & DVD|Air Conditioners|2|73|2.74|1|50.00|
-|VCD & DVD|Recording Pen|2|73|2.74|0|0.00|
-|VCD & DVD|VCD & DVD|2|73|2.74|0|0.00|
-|VCD & DVD|Home Theater System|1|73|1.37|1|100.00|
-|VCD & DVD|Cameras & Camcorders Accessories|1|73|1.37|0|0.00|
-|VCD & DVD|Washers & Dryers|1|73|1.37|0|0.00|
-|VCD & DVD|Camcorders|1|73|1.37|0|0.00|
-|VCD & DVD|Lamps|1|73|1.37|0|0.00|
-|Washers & Dryers|Movie DVD|10|32|31.25|1|10.00|
-|Washers & Dryers|Smart phones & PDAs |8|32|25.00|1|12.50|
-|Washers & Dryers|Touch Screen Phones |6|32|18.75|1|16.67|
-|Washers & Dryers|Desktops|5|32|15.63|1|20.00|
-|Washers & Dryers|Water Heaters|5|32|15.63|1|20.00|
-|Washers & Dryers|Download Games|4|32|12.50|0|0.00|
-|Washers & Dryers|Boxed Games|4|32|12.50|2|50.00|
-|Washers & Dryers|Televisions|3|32|9.38|1|33.33|
-|Washers & Dryers|Digital SLR Cameras|3|32|9.38|1|33.33|
-|Washers & Dryers|Cell phones Accessories|2|32|6.25|0|0.00|
-|Washers & Dryers|VCD & DVD|2|32|6.25|1|50.00|
-|Washers & Dryers|Washers & Dryers|2|32|6.25|0|0.00|
-|Washers & Dryers|Home & Office Phones|2|32|6.25|0|0.00|
-|Washers & Dryers|Lamps|2|32|6.25|0|0.00|
-|Washers & Dryers|Laptops|2|32|6.25|0|0.00|
-|Washers & Dryers|Projectors & Screens|2|32|6.25|0|0.00|
-|Washers & Dryers|Microwaves|1|32|3.13|0|0.00|
-|Washers & Dryers|Cameras & Camcorders Accessories|1|32|3.13|0|0.00|
-|Washers & Dryers|Coffee Machines|1|32|3.13|1|100.00|
-|Washers & Dryers|Digital Cameras|1|32|3.13|0|0.00|
-|Washers & Dryers|Bluetooth Headphones|1|32|3.13|0|0.00|
-|Washers & Dryers|Monitors|1|32|3.13|0|0.00|
-|Washers & Dryers|Printers, Scanners & Fax|1|32|3.13|0|0.00|
-|Washers & Dryers|Recording Pen|1|32|3.13|1|100.00|
-|Washers & Dryers|Refrigerators|1|32|3.13|0|0.00|
-|Water Heaters|Movie DVD|27|85|31.76|2|7.41|
-|Water Heaters|Touch Screen Phones |20|85|23.53|5|25.00|
-|Water Heaters|Desktops|17|85|20.00|4|23.53|
-|Water Heaters|Smart phones & PDAs |15|85|17.65|4|26.67|
-|Water Heaters|Boxed Games|13|85|15.29|4|30.77|
-|Water Heaters|Computers Accessories|11|85|12.94|3|27.27|
-|Water Heaters|Monitors|8|85|9.41|2|25.00|
-|Water Heaters|Download Games|8|85|9.41|0|0.00|
-|Water Heaters|Projectors & Screens|7|85|8.24|0|0.00|
-|Water Heaters|Water Heaters|7|85|8.24|0|0.00|
-|Water Heaters|Printers, Scanners & Fax|7|85|8.24|1|14.29|
-|Water Heaters|Home & Office Phones|7|85|8.24|4|57.14|
-|Water Heaters|Televisions|6|85|7.06|1|16.67|
-|Water Heaters|Laptops|5|85|5.88|2|40.00|
-|Water Heaters|Cell phones Accessories|5|85|5.88|1|20.00|
-|Water Heaters|Digital SLR Cameras|4|85|4.71|2|50.00|
-|Water Heaters|Bluetooth Headphones|4|85|4.71|1|25.00|
-|Water Heaters|Car Video|4|85|4.71|1|25.00|
-|Water Heaters|Home Theater System|4|85|4.71|3|75.00|
-|Water Heaters|Refrigerators|3|85|3.53|0|0.00|
-|Water Heaters|Digital Cameras|3|85|3.53|1|33.33|
-|Water Heaters|VCD & DVD|2|85|2.35|0|0.00|
-|Water Heaters|Recording Pen|2|85|2.35|1|50.00|
-|Water Heaters|Lamps|1|85|1.18|0|0.00|
-|Water Heaters|Microwaves|1|85|1.18|0|0.00|
-|Water Heaters|Washers & Dryers|1|85|1.18|0|0.00|
-|Water Heaters|Cameras & Camcorders Accessories|1|85|1.18|0|0.00|
-|Water Heaters|Air Conditioners|1|85|1.18|0|0.00|
-
-</details>
+[**🔍Click to view Resultant Table**](/result_tables/.xlsx)
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q3B ]
 
