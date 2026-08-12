@@ -1013,8 +1013,15 @@ ORDER BY
 |Lamps|26|130|20.00|21.01|-1.01|
 
 </details>
+<br></br>
 
-[ 🖼️ PLACEHOLDER: Insert visual/chart for Q3A ]
+![Product Subcategory Scattering](/assets/06_q3_subcategory_scattering.png)
+
+*Scatter Plot displaying the product subcategories scattered on the basis of cutomer acquired and subcategory wise retention rate for the most recent matured cohort year.*
+
+![Product Subcategory Scattering (Selective)](/assets/07_q3_selective_subcategory_scattering.png)
+
+*Scatter Plot displaying the few selected product subcategories (for clarity) scattered on the basis of cutomer acquired and subcategory wise retention rate for the most recent matured cohort year.*
 
 💡 Key Insights:
 
@@ -1026,7 +1033,15 @@ ORDER BY
 
 * **Significant Underperformers:** Home & Office Phones (18.87%, -2.14% pts) and Printers, Scanners & Fax (18.96%, -2.05% pts) lag furthest behind in converting initial buyers into repeat customers.
 
-* **Business Takeaway:** Shift acquisition ad spend toward high-retention anchor categories like Desktops and Core Electronics. For low-retention volume entry points (like Smartphones and DVDs), implement automated cross-sell triggers within 30 days of initial delivery.
+* **Business Takeaway:** Gateway Portfolio Optimization Strategy
+
+  * **Core Drivers (High Volume + High Retention):** Maintain sustained marketing investment and primary campaign placement on proven scaling anchors like Desktops. These products drive both top-of-funnel volume and top-tier long-term value.
+
+  * **Hidden Gems (Low Volume + High Retention):** Accelerate ad spend and promotional exposure for categories like Major Appliances. Increasing top-of-funnel reach for these under-leveraged products presents the fastest path to expanding overall retention rates and driving high-LTV revenue.
+
+  * **Acquisition Workhorses (High Volume + Lower Retention):** Continue funding entry channels like Movie DVDs and Smartphones if budget permits, or selectively reallocate marginal ad spend toward higher-retention products. Because these categories bring in the vast majority of total new customers, keep them active while enforcing immediate post-purchase cross-sell workflows (Days 0–30) to rescue retention.
+
+  * **Laggards (Low Volume + Low Retention):** Deprioritize marketing spend and operational focus for bottom-tier products like Home & Office Phones. Reallocate these resources to high-converting gateway products to maximize return on ad spend (ROAS).
 
 #### **Q3B: What specific products or categories do customers most frequently buy on their second order after purchasing a specific Gateway Product?**
 * **Why this matters:**  Maps the exact cross-sell pathway ($O_1 \rightarrow O_2$) so marketing can build highly personalized product recommendation engines.
@@ -1194,17 +1209,72 @@ ORDER BY
 ```
 </details>
 
-[**🔍Click to view Resultant Table**](/result_tables/.xlsx)
+<details>
+<summary><b>🔍 Click to view a glimpse of the Resultant Table 
 
-[ 🖼️ PLACEHOLDER: Insert visual/chart for Q3B ]
+(This is a filtered table that we actually need. It has the top 3 Order 2 and Order 1 subcategory products pari with highest retention. All the Order 1 subcategory products are the gateway subcategory products that are valid for our further analysis.)</b></summary>
+
+|order1_gateway_subcategory|order2_destination_subcategory|pair_customer_count|total_gateway_retained_customers|incidence_rate_pct|customers_reaching_3plus_orders|pair_to_order3_conversion_pct|
+|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
+|Car Video|Movie DVD|30|64|46.88|5|16.67|
+|Car Video|Touch Screen Phones|14|64|21.88|1|7.14|
+|Car Video|Smart phones & PDAs|13|64|20.31|1|7.69|
+|Desktops|Movie DVD|142|363|39.12|15|10.56|
+|Desktops|Smart phones & PDAs|78|363|21.49|15|19.23|
+|Desktops|Touch Screen Phones|69|363|19.01|7|10.14|
+|Digital Cameras|Movie DVD|19|51|37.25|2|10.53|
+|Digital Cameras|Touch Screen Phones|9|51|17.65|1|11.11|
+|Digital Cameras|Desktops|9|51|17.65|3|33.33|
+|Movie DVD|Movie DVD|231|609|37.93|26|11.26|
+|Movie DVD|Desktops|118|609|19.38|18|15.25|
+|Movie DVD|Smart phones & PDAs|110|609|18.06|14|12.73|
+|Refrigerators|Movie DVD|17|53|32.08|1|5.88|
+|Refrigerators|Smart phones & PDAs|13|53|24.53|3|23.08|
+|Refrigerators|Touch Screen Phones|11|53|20.75|1|9.09|
+|Smart phones & PDAs|Movie DVD|113|342|33.04|11|9.73|
+|Smart phones & PDAs|Smart phones & PDAs|59|342|17.25|8|13.56|
+|Smart phones & PDAs|Touch Screen Phones|59|342|17.25|5|8.47|
+|Touch Screen Phones|Movie DVD|106|309|34.32|23|21.7|
+|Touch Screen Phones|Smart phones & PDAs|67|309|21.68|11|16.42|
+|Touch Screen Phones|Desktops|56|309|18.12|9|16.07|
+|Washers & Dryers|Movie DVD|10|32|31.25|1|10|
+|Washers & Dryers|Smart phones & PDAs|8|32|25|1|12.5|
+|Washers & Dryers|Touch Screen Phones|6|32|18.75|1|16.67|
+
+</details>
+<br></br>
+
+[**🔍Click to view Full Resultant Table**](/result_tables/.xlsx)
 
 💡 Key Insights:
 
-* **Major Appliances Lead Retention:** Large household appliances drive the highest repeat purchase rates. Refrigerators (25.98%, +4.97% pts vs baseline) and Washers & Dryers (25.40%, +4.39% pts vs baseline) represent the top gateway products for customer loyalty.
+* **Movie DVD is the Universal Repurchase Magnet:** Regardless of the initial entry point, Movie DVD serves as the #1 Order 2 destination subcategory across every gateway product analyzed, capturing between 31.25% (Washers & Dryers) and 46.88% (Car Video) of all second purchases. It acts as a universal, low-friction bridging product for repeat engagement.
 
-* **Desktops as the Volume & Retention Winner:** Desktops serve as the premier high-scale gateway product, acquiring 1,570 customers while delivering a 23.12% retention rate (+2.11% pts above baseline).
+* **Mobile Tech Dominates Secondary Basket Mix:** Outside of Movie DVDs, repeat buyers overwhelmingly migrate into personal mobile technology—specifically Smart phones & PDAs and Touch Screen Phones. These two categories consistently claim the remaining top-three destination slots across major appliance, computing, and consumer electronics gateways.
+* **High-Ticket Tech Cross-Sells Drive Multi-Order Retention (3+ Orders):** While Movie DVDs maximize initial second-order volume, higher-ticket technology transitions deliver superior long-term customer retention:
+  * **Digital Cameras $\rightarrow$ Desktops:** Leads all pathways with a 33.33% conversion rate to 3+ orders.
+  * **Refrigerators $\rightarrow$ Smart phones & PDAs:** Achieves a 23.08% conversion rate to 3+ orders.
+  * **Touch Screen Phones $\rightarrow$ Movie DVD:** Delivers a 21.70% conversion rate to 3+ orders.
+  * **Desktops $\rightarrow$ Smart phones & PDAs:** Generates a 19.23% conversion rate to 3+ orders.
 
-* **High Acquisition Volume, Lower Loyalty:** The two largest acquisition drivers—Movie DVDs (2,953 customers) and Smart phones & PDAs (1,723 customers)—both perform below the company baseline at 20.62% (-0.39% pts) and 19.85% (-1.16% pts) respectively.
+* **Business Takeaways: Empirical Retargeting & Personalization Bridge**
+  * **Deploy Automated Post-Purchase Ad Workflows (Order 1 $\rightarrow$ Order 2 Bridge)** 
+    * **Action:** Use this empirical transition data as the exact blueprint for automated post-purchase ad targeting. The moment a customer purchases an Order 1 Gateway product, immediately trigger targeted cross-sell campaigns showcasing the top destination products favored by historical retained buyers for that specific gateway.
+    * **Rationale:** Re-engaging customers with products mathematically proven to drive repeat orders eliminates guesswork, boosts ad conversion rates, and builds immediate second-order retention momentum.
+  * **Capitalize on Hidden Gems (Refrigerators, Washers & Dryers)**
+    * **Action:** Increase acquisition exposure for these high-retention products, then immediately retarget buyers with personalized ads for Smartphones & PDAs and Touch Screen Phones alongside low-friction catalog items.
+    * **Rationale:** Unlocking top-of-funnel acquisition for these high-loyalty gateways and immediately routing buyers into proven secondary tech categories expands total company revenue and retention quality simultaneously.
+  * **Maximize Core Driver LTV (Desktops)**
+    * **Action:** Retarget Desktop buyers with mobile tech accessories and ecosystem devices within 30–60 days of purchase.
+    * **Rationale:** Because Desktops balanced acquisition volume with high retention, cross-selling them into Smartphones (21.49% incidence) solidifies customer loyalty across multiple product categories.
+  * **Rescue Volume Workhorses (Movie DVDs)**
+    * **Action:** For the massive volume of customers entering through Movie DVDs, immediately present cross-sell recommendations for higher-ticket hardware (Desktops and Smartphones).
+    * **Rationale:** Moving buyers from low-margin, lower-retention media into high-margin tech categories elevates customer lifetime value and prevents early churn.
+  * **Full-Spectrum Personalization (Beyond the "Vital Few")**
+    * **Action:** Apply automated cross-sell triggers across all remaining long-tail and niche gateway pairs in the underlying dataset, extending targeting rules beyond the primary "vital few" subcategories.
+    * **Rationale:** While executive strategy prioritizes high-volume anchor categories for maximum top-line impact, calculating transitions for 100% of gateway products ensures no customer segment is neglected. Capturing even small retention gains across lower-volume categories guarantees total customer base coverage and plugs hidden lifetime value leaks.
+    
+*Note on Order 3 Long-Tail Conversion Data: Order 3 retention rates (pair_to_order3_conversion_pct) have been calculated to provide deeper directional visibility into multi-order customer lifecycles, though evaluating 3+ orders remains strictly outside the primary scope of this Phase 3 retention framework. These metrics highlight key areas for future optimization: order pairs that demonstrate strong second-order retention but suffer sharp conversion drop-offs on Order 3 pinpoint prime targets for improved 3rd-order re-engagement campaigns, allowing the business to capture extended retention on established high-volume bridges.*
 
 ## 🔮 Future Analysis & Advanced Considerations (Out of Scope)
 
