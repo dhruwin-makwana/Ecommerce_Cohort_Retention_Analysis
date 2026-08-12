@@ -260,6 +260,8 @@ ORDER BY
 
 *Donut chart displaying the percentage of acquired customers converting to a second purchase within a year.*
 
+**🔍Resultant Table and Visualization Link**: [**01_q1_q2_cohort_retention_ltv_multiplier.xlsx**](/result_tables(.xlsx)/01_q1_q2_cohort_retention_ltv_multiplier.xlsx)
+
 **💡 Key Insights:**
 
 * **Low Baseline Retention:** Only 21.0% of acquired customers (1,807 out of 8,601 total) successfully converted to a second purchase within a 365-day window.
@@ -377,6 +379,8 @@ ORDER BY
 ![Days taken to place second order in the cohort year](/assets/02_q1A_repeat_cust_bucket.png)
 
 *Vertical Column chart displaying the count of retained customers bucketed quaterly based on days taken for placing second purchase order after the first purchase.*
+
+**🔍Resultant Table and Visualization Link**: [**02_q1a_return_cadence_time_to_second_order.xlsx**](/result_tables(.xlsx)/02_q1a_return_cadence_time_to_second_order.xlsx)
 
 **💡 Key Insights:**
 
@@ -557,7 +561,9 @@ ORDER BY
 
 *Combo chart displaying the Y-o-Y mature cohort year comparison for customers acquired and retained.*
 
-💡 Key Insights:
+**🔍Resultant Table and Visualization Link**: [**03_q1b_yoy_retention_and_aov_trend.xlsx**](/result_tables(.xlsx)/03_q1b_yoy_retention_and_aov_trend.xlsx)
+
+**💡 Key Insights:**
 
 * **5x Multi-Year Retention Growth:** The 365-day retention rate experienced a dramatic long-term improvement, climbing from 4.18% in 2015 to a peak of 21.94% in 2022. Total retained customers grew 16.7x (from 118 to 1,977 buyers).
 
@@ -703,7 +709,9 @@ ORDER BY
 
 *100% Stacked Bar Chart displaying the share percetage among the total acquired customers and the share of revenue contributed by the churned customers and retained customers for the most recent matured cohort year.*
 
-💡 Key Insights:
+**🔍Resultant Table and Visualization Link**: [**01_q1_q2_cohort_retention_ltv_multiplier.xlsx**](/result_tables(.xlsx)/01_q1_q2_cohort_retention_ltv_multiplier.xlsx)
+
+**💡 Key Insights:**
 
 * **More Than Double the Lifetime Value (2.12x Multiplier):** Repeat buyers achieve an average LTV of $4,535.52, compared to $2,136.68 for single-order buyers. Securing a second purchase instantly unlocks an additional $2,398.84 in incremental revenue per customer.
 
@@ -826,7 +834,9 @@ ORDER BY
 </details>
 <br/><br/>
 
-💡 Key Insights:
+**🔍Resultant Table Link**: [**01_q1_q2_cohort_retention_ltv_multiplier.xlsx**](/result_tables(.xlsx)/01_q1_q2_cohort_retention_ltv_multiplier.xlsx)
+
+**💡 Key Insights:**
 
 * **Exact Multiplier (2.12x Value Expansion):** Converting a single-order customer into a second-time buyer expands their total lifetime value by an exact factor of 2.12x (a +112.3% net increase in revenue).
 
@@ -1023,7 +1033,9 @@ ORDER BY
 
 *Scatter Plot displaying the few selected product subcategories (for clarity) scattered on the basis of cutomer acquired and subcategory wise retention rate for the most recent matured cohort year.*
 
-💡 Key Insights:
+**🔍Resultant Table and Visualization Link**: [**04_q3a_gateway_product_retention_vs_baseline.xlsx**](/result_tables(.xlsx)/04_q3a_gateway_product_retention_vs_baseline.xlsx)
+
+**💡 Key Insights:**
 
 * **Major Appliances Lead Retention:** Large household appliances drive the highest repeat purchase rates. Refrigerators (25.98%, +4.97% pts vs baseline) and Washers & Dryers (25.40%, +4.39% pts vs baseline) represent the top gateway products for customer loyalty.
 
@@ -1242,11 +1254,13 @@ ORDER BY
 |Washers & Dryers|Touch Screen Phones|6|32|18.75|1|16.67|
 
 </details>
-<br></br>
 
-[**🔍Click to view Full Resultant Table**](/result_tables/.xlsx)
 
-💡 Key Insights:
+**🔍Click to view Full Resultant Table:**
+[**05_q3b_gateway_to_second_order_destinations**](/result_tables(.xlsx)/05_q3b_gateway_to_second_order_destinations.xlsx)
+
+
+**💡 Key Insights:**
 
 * **Movie DVD is the Universal Repurchase Magnet:** Regardless of the initial entry point, Movie DVD serves as the #1 Order 2 destination subcategory across every gateway product analyzed, capturing between 31.25% (Washers & Dryers) and 46.88% (Car Video) of all second purchases. It acts as a universal, low-friction bridging product for repeat engagement.
 
