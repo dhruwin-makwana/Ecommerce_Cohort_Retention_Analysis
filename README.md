@@ -254,6 +254,7 @@ ORDER BY
 |Retained_Cust|1807|21.0|8195692.105907859|36.1|4535.52|2.12|
 
 </details>
+<br/><br/>
 
 ![Customer Retention vs. Churn Breakdown (Matured Cohort)](/assets/01_q1_customer_retention.png)
 
@@ -371,6 +372,7 @@ ORDER BY
 |05. 365+ Days|704|28.0|8.2|
 
 </details>
+<br/><br/>
 
 ![Days taken to place second order in the cohort year](/assets/02_q1A_repeat_cust_bucket.png)
 
@@ -378,11 +380,26 @@ ORDER BY
 
 **💡 Key Insights:**
 
-* **Early Momentum is Critical:** Nearly a quarter of all repeat buyers (22.6%) make their second purchase within the first 90 days. The likelihood of a customer returning steadily declines after this initial three-month window.
+* **Front-Loaded Retention Velocity:** Nearly a quarter of all repeat buyers (22.6%) return within the first 90 days. Repurchase momentum peaks immediately following the initial order and steadily decays across subsequent quarters.
 
-* **The "Late Returner" Phenomenon:** Surprisingly, the largest single segment of repeat buyers (28.0%) takes more than a full year (365+ days) to make their second purchase.
+* **Mid-Lifecycle Plateau (Days 181–365):** Repurchase behavior stabilizes during the second half of the retention cycle, holding flat at ~15% of repeat buyers per quarter (15.0% in Q3, 15.1% in Q4). This represents a predictable "slow-drip" replenishment window before customers hit the churn threshold.
 
-* **Business Takeaway:** The marketing team should deploy a two-pronged retargeting strategy. First, launch aggressive re-engagement campaigns within the 0-90 day window to capture early momentum. Second, implement an automated "anniversary" win-back campaign at the 12-month mark to successfully convert the massive pool of late returners.
+* **Substantial Reactivation Potential:** Over a quarter of all repeat transactions (28.0%) occur after the 365-day churn mark. This reveals that lapsed customers carry significant latent brand equity rather than permanent churn.
+
+* **Business Takeaways:**
+   * Days 0–90: High-Intent Cross-Sell & Onboarding
+      * Action: Deploy immediate post-purchase engagement workflows, product usage guides, and targeted cross-sell recommendations within 30 to 60 days of Order 1.
+     * Rationale: Customer brand recall and product interest are at their peak. Capturing buyers during this window yields the highest conversion efficiency (22.6% of repeat buyers) and accelerates customer lifetime value (LTV).
+
+   * Days 270–365: Pre-Churn Risk Mitigation
+      * Action: Trigger automated "at-risk" retention campaigns with personalized incentives (e.g., loyalty points, discount codes, tailored category recommendations) at the 9-month mark.
+      * Rationale: The 15.1% conversion rate between Days 271–365 shows a steady stream of late-stage within-window buyers. Re-engaging them before Day 365 prevents them from slipping into the churned pool entirely.
+
+   * Days 365+: Automated Win-Back & Anniversary Triggers
+      * Action: Implement automated 12-month and 18-month "Anniversary" or "We Miss You" campaigns aimed at inactive profiles.
+      * Rationale: The massive 28.0% volume of 365+ day buyers proves that long-term lapsed buyers are highly recoverable. Re-engaging dormant users through low-cost automated email/SMS channels carries a far lower Customer Acquisition Cost (CAC) than acquiring entirely net-new users.
+
+*Note on Retention Window vs. Reactivation: While the business defines customer churn at 365 days, this analysis includes repeat orders beyond Day 365 to capture complete customer lifecycle data. Buyers returning within 0–365 days (72.0% of all repeat buyers; 21.0% total cohort conversion) represent strictly retained active customers. Buyers returning at 365+ days (28.0% of repeat buyers; 8.2% total cohort conversion) represent reactivated/win-back customers. Including both segments ensures we evaluate active retention velocity alongside long-tail win-back potential without distorting core churn metrics.*
 
 #### **Q1B: How has our 1-year retention rate percentage evolved year-over-year across mature historical cohorts?**
 * **Why this matters:** Tracks whether the company's customer loyalty is naturally improving or degrading over time.
@@ -534,11 +551,32 @@ ORDER BY
 |2022|9010|7033|1977|21.94|2377.55|2105.98|
 
 </details>
+<br/><br/>
 
+![Y-o-Y mature cohort year comparison](/assets/03_q1b_yoy_retention.png)
 
-[ 🖼️ PLACEHOLDER: Insert visual/chart for Q1B ]
+*Combo chart displaying the Y-o-Y mature cohort year comparison for customers acquired and retained.*
 
-Key Insight: [ 💡 PLACEHOLDER: Insight here ]
+💡 Key Insights:
+
+* **5x Multi-Year Retention Growth:** The 365-day retention rate experienced a dramatic long-term improvement, climbing from 4.18% in 2015 to a peak of 21.94% in 2022. Total retained customers grew 16.7x (from 118 to 1,977 buyers).
+
+* **The 2020 Anomaly:** Retention dropped sharply to 5.44% in the 2020 cohort (down from 12.28% in 2019), coinciding with a steep decline in new customer acquisition (3,031 customers). This highlights significant external disruptions in customer purchasing behavior during that period.
+
+* **Scalable Retention at Volume:** The post-2020 recovery was immediate and robust. The 2022 cohort achieved the highest retention rate in company history (21.94%) while simultaneously absorbing the largest acquisition volume on record (9,010 new customers), proving that retention quality did not degrade as acquisition scaled.
+
+* **Volume Scale vs. AOV Compression:** While retention rate and retained volume peaked in 2022 (21.94% / 1,977 customers), Order 1 AOV ($2,377.55) and Order 2 AOV ($2,105.98) hit historical lows. Lower average prices likely broadened customer acquisition and retention, but reduced per-customer basket sizes.
+
+* **Order 2 Value Decay:** In recent high-performing cohorts (2021 and 2022), Order 2 AOV consistently dropped below Order 1 AOV (an 11.4% decline in 2022 from $2,377.55 to $2,105.98). Repeat buyers return more frequently, but spend less on their second purchase than their first.
+
+* **Business Takeaway:** Onboarding and retention strategies implemented over the 8-year period have successfully transformed customer retention from an early weak point into a reliable, scalable driver of business value.
+  * Net Revenue Strategy Succeeded (Volume Outpaced Basket Size)
+     * Rationale: Total revenue generated by retained customers grew substantially over time despite AOV compression. A 16.7x increase in retained buyers far outweighs the ~18% to 25% decrease in AOVs between 2015 and 2022. Lowering price thresholds successfully unlocked scalable retention.
+
+  * Target Order 2 Basket Expansion (Upsell & Cross-Sell)
+    * Rationale: Because Order 2 AOV is declining relative to Order 1 AOV in modern cohorts ($2,105.98 vs $2,377.55 in 2022), second-order monetization is underperforming. Implementing targeted post-purchase bundles, minimum threshold discounts (e.g., "Spend $X more for free shipping on your second order"), and premium accessory attachments can bridge this gap and maximize per-customer profit margins.
+
+*Note on AOV Dilution vs. Customer Diversification: A moderate decline in Average Order Value (~15%–18%) is an expected and acceptable tradeoff when retention rates scale dramatically from 4.18% to 21.94%. Early, low-volume cohorts (2015–2017) were skewed toward high-spending niche adopters. As acquisition volume expanded, the customer base diversified across broader demographics with varied spending capacities. Because total retained buyer volume expanded by 16.7x, aggregate gross revenue grew substantially despite slightly lower individual basket sizes. However, this AOV compression highlights a key untapped profit margin opportunity: capturing lost basket size on Order 2 through targeted upselling can further accelerate bottom-line growth.*
 
 ### 📈 Phase 2: The Revenue & LTV Multiplier (Question 2)
 **Core Objective:** Prove the financial ROI of a repeat buyer to justify shifting budget from pure acquisition to retention.
@@ -654,11 +692,26 @@ ORDER BY
 |Churned_Cust|6794|79.0|14516604.705265613|63.9|2136.68|1.00|
 |Retained_Cust|1807|21.0|8195692.105907859|36.1|4535.52|2.12|
 
-</details>
+</details> 
+<br/><br/>
 
-[ 🖼️ PLACEHOLDER: Insert visual/chart for Q2/Q2A ]
+![LTV comparison](/assets/04_q2_ltv_comparison.png)
 
-Key Insight: [ 💡 PLACEHOLDER: Insight here ]
+*Bar Chart displaying the Average LTV (Lifetime Value) comaprison between the churned customers and retained customers for the most recent matured cohort year.*
+
+![Revenue share Comaprison](/assets/05_q2_rev_comparison.png)
+
+*100% Stacked Bar Chart displaying the share percetage among the total acquired customers and the share of revenue contributed by the churned customers and retained customers for the most recent matured cohort year.*
+
+💡 Key Insights:
+
+* **More Than Double the Lifetime Value (2.12x Multiplier):** Repeat buyers achieve an average LTV of $4,535.52, compared to $2,136.68 for single-order buyers. Securing a second purchase instantly unlocks an additional $2,398.84 in incremental revenue per customer.
+
+* **Disproportionate Revenue Contribution:** Despite accounting for only 21.0% of total acquired customers, repeat buyers generate 36.1% ($8.20M) of the company's cumulative net revenue.
+
+* **Massive Financial Upside:** Single-order buyers currently lock up $14.52M across 6,794 churned customers. Converting just 10% of these single-order buyers into repeat customers would generate an estimated ~$1.63M in incremental baseline revenue.
+
+* **Business Takeaway:** Retention is not just a loyalty metric—it is the single highest-leverage growth driver for the business. Acquisition efforts should be calibrated around customer quality rather than raw volume.
 
 #### **Q2B (The LTV Multiplier): By what exact factor ($X\times$) does customer value expand when a first-time buyer is converted into a second-time buyer?**
 * **Why this matters:** Quantifies exactly how much more a customer is worth if marketing can successfully get them to buy a second time.
@@ -771,11 +824,17 @@ ORDER BY
 |Retained_Cust|1807|21.0|8195692.105907859|36.1|4535.52|2.12|
 
 </details>
+<br/><br/>
 
+💡 Key Insights:
 
-[ 🖼️ PLACEHOLDER: Insert visual/chart for Q2B ]
+* **Exact Multiplier (2.12x Value Expansion):** Converting a single-order customer into a second-time buyer expands their total lifetime value by an exact factor of 2.12x (a +112.3% net increase in revenue).
 
-Key Insight: [ 💡 PLACEHOLDER: Insight here ]
+* **Quantified Revenue Delta:** Moving a customer past the second-order threshold immediately unlocks an additional +$2,398.84 in incremental LTV ($4,535.52 vs. $2,136.68).
+
+* **CAC Retargeting Allowance:** Because securing a second order doubles customer value, the business can profitably allocate up to $2,398.84 in lifetime retention marketing, loyalty discounts, and re-engagement campaigns per customer before hitting diminishing returns compared to single-order buyers.
+
+* **Business Takeaway:** Retention marketing operates at a far higher leverage point than cold acquisition. Re-engaging an existing buyer yields double the economic return of acquiring a new one-time purchaser.
 
 ### 🛒 Phase 3: Gateway Products for 2nd-Purchase Conversion (Question 3)
 **Core Objective:** Provide the marketing team with tactical, product-level triggers for retargeting campaigns.
@@ -957,7 +1016,17 @@ ORDER BY
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q3A ]
 
-Key Insight: [ 💡 PLACEHOLDER: Insight here ]
+💡 Key Insights:
+
+* **Major Appliances Lead Retention:** Large household appliances drive the highest repeat purchase rates. Refrigerators (25.98%, +4.97% pts vs baseline) and Washers & Dryers (25.40%, +4.39% pts vs baseline) represent the top gateway products for customer loyalty.
+
+* **Desktops as the Volume & Retention Winner:** Desktops serve as the premier high-scale gateway product, acquiring 1,570 customers while delivering a 23.12% retention rate (+2.11% pts above baseline).
+
+* **High Acquisition Volume, Lower Loyalty:** The two largest acquisition drivers—Movie DVDs (2,953 customers) and Smart phones & PDAs (1,723 customers)—both perform below the company baseline at 20.62% (-0.39% pts) and 19.85% (-1.16% pts) respectively.
+
+* **Significant Underperformers:** Home & Office Phones (18.87%, -2.14% pts) and Printers, Scanners & Fax (18.96%, -2.05% pts) lag furthest behind in converting initial buyers into repeat customers.
+
+* **Business Takeaway:** Shift acquisition ad spend toward high-retention anchor categories like Desktops and Core Electronics. For low-retention volume entry points (like Smartphones and DVDs), implement automated cross-sell triggers within 30 days of initial delivery.
 
 #### **Q3B: What specific products or categories do customers most frequently buy on their second order after purchasing a specific Gateway Product?**
 * **Why this matters:**  Maps the exact cross-sell pathway ($O_1 \rightarrow O_2$) so marketing can build highly personalized product recommendation engines.
@@ -1129,7 +1198,13 @@ ORDER BY
 
 [ 🖼️ PLACEHOLDER: Insert visual/chart for Q3B ]
 
-Key Insight: [ 💡 PLACEHOLDER: Insight here ]
+💡 Key Insights:
+
+* **Major Appliances Lead Retention:** Large household appliances drive the highest repeat purchase rates. Refrigerators (25.98%, +4.97% pts vs baseline) and Washers & Dryers (25.40%, +4.39% pts vs baseline) represent the top gateway products for customer loyalty.
+
+* **Desktops as the Volume & Retention Winner:** Desktops serve as the premier high-scale gateway product, acquiring 1,570 customers while delivering a 23.12% retention rate (+2.11% pts above baseline).
+
+* **High Acquisition Volume, Lower Loyalty:** The two largest acquisition drivers—Movie DVDs (2,953 customers) and Smart phones & PDAs (1,723 customers)—both perform below the company baseline at 20.62% (-0.39% pts) and 19.85% (-1.16% pts) respectively.
 
 ## 🔮 Future Analysis & Advanced Considerations (Out of Scope)
 
